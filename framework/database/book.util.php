@@ -1,7 +1,6 @@
 <?php
     require 'MysqlUtil.class.php';
 
-
     /**
      * get all books from database into an array, returns false if query failure.
      * @param MysqlUtil $manager
