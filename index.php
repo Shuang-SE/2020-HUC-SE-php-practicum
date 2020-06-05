@@ -1,2 +1,5 @@
 <?php
-    header('Location: /application/view/home/test.html');
+    require 'app/config/config.php';
+    $index = VIEW . '/home/test.php';
+    header("Location: $index");
+    die();
