@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>注册</title>
+        <script type="text/javascript" src="../asset/js/jquery/3.5.1/jquery.min.js"></script>
+        <script type="module" rel="script" src="../asset/js/register_check.js"></script>
+        <link type="text/css" rel="stylesheet" href="../asset/css/register.css"/>
+    </head>
+    <body>
+        <div class="validateBox">
+            <form id="registerForm" method="post" action="login.html">
+                <div class="formRow">
+                    <h1 id="caption">欢迎注册</h1>
+                </div>
+                <div class="formRow">
+                    <label for="username" class="icon"></label>
+                    <input type="text" id="username" name="username" placeholder="请输入不超过12位的用户名" maxlength="12"/>
+                    <div id="usernamePrompt" class="promptInfo"></div>
+                </div>
+                <div class="formRow">
+                    <label for="password" class="icon"></label>
+                    <input type="password" id="password" name="password" placeholder="请输入8~20位密码" maxlength="20"/>
+                    <div id="passwordPrompt" class="promptInfo"></div>
+                </div>
+                <div class="formRow">
+                    <label for="rePassword" class="icon"></label>
+                    <input type="password" id="rePassword" name="rePassword" placeholder="请再次输入密码" maxlength="20"/>
+                    <div id="rePasswordPrompt" class="promptInfo"></div>
+                </div>
+                <div class="formRow">
+                    <label for="phoneNumber" class="icon"></label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="请输入11位手机号码" maxlength="11"/>
+                    <div id="phoneNumberPrompt" class="promptInfo"></div>
+                </div>
+                <div class="formRow shorterRow">
+                    <label>性别</label>
+                    <div id="genderBlock">
+                        <input type="radio" id="male" name="gender" value="male" checked/><label for="male" class="genderRadio">男</label>
+                        <input type="radio" id="female" name="gender" value="female"/><label for="female" class="genderRadio">女</label>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <img id="captchaImage" src="captcha_generator"/>
+                    <input type="text" id="captcha" name="captcha" placeholder="请输入六位验证码" maxlength="6"/>
+                    <div id="captchaPrompt" class="promptInfo"></div>
+                </div>
+                <div id="clickable" class="formRow shorterRow">
+                    <input type="submit" value="注册"/>
+                    <span id="lastCheckInfo">有信息未填写或不合规则, 请核实后提交!</span>
+                    <a id="loginButton" href="login.html">已有账号? 立即登录</a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

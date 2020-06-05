@@ -1,0 +1,230 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    background: url("../img/background/ps-bg-image.jpeg") repeat-y center;
+    margin: 0 0;
+    color: #5b616c;
+}
+
+/*表单容器样式*/
+/*表单及表单行样式*/
+.validateBox {
+    background: #fff;
+    width: 580px;
+    position: relative;
+    top: 10vh;
+    margin: 0 auto;
+    border-radius: 3%;
+}
+
+.validateBox form {
+    padding: 2% 0;
+}
+
+form .formRow {
+    position: relative;
+    width: 80%;
+    margin: 15px auto;
+    line-height: 46px;
+}
+
+form .shorterRow {
+    line-height: 36px;
+}
+
+/*这个伪元素用来自适应表格行和其内部元素浮动后的高度*/
+form .formRow::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/*一些组件的公有样式*/
+input[type="text"], input[type="password"],
+input[type="submit"], .formRow textarea {
+    display: block;
+    font-size: 1.1em;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#genderBlock, input[name="captcha"] {
+    float: right;
+}
+
+input[type="text"], input[type="password"] {
+    height: 46px;
+    padding: 10px 0 10px 46px;
+    outline: none;
+    border: 1px solid #e6e6e6;
+    border-radius: 100px;
+}
+input[type="text"]:focus, input[type="password"]:focus, .formRow textarea:focus {
+    border-color: #0075b9;
+}
+
+input[name="gender"] {
+    display: none;
+}
+
+.genderRadio {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/*标题样式*/
+#caption {
+    margin: 0;
+    color: #0075b9;
+}
+
+/*输入框图标样式*/
+.icon {
+    display: inline-block;
+    position: absolute;
+    top: 13px;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+}
+
+label[for="username"] {
+    background: url("../img/icon/user-icon.png") no-repeat center;
+}
+
+label[for="password"], label[for="rePassword"] {
+    background: url("../img/icon/password-icon.png") no-repeat center;
+}
+
+label[for="phoneNumber"] {
+    background: url("../img/icon/phone-icon.png") no-repeat center;
+}
+
+/*性别单选框样式*/
+.genderRadio {
+    background: #e0e0e0;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    line-height: 26px;
+    width: 46px;
+    height: 36px;
+    padding: 5px;
+    border: 1px;
+    border-radius: 50%;
+}
+
+input[name="gender"]:checked + .genderRadio {
+    color: #f8f8f8;
+    background: #00a2db;
+}
+
+/*个人简介多行文本框样式*/
+.formRow textarea {
+    outline: none;
+    resize: none;
+    height: 100px;
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+/*验证码输入框样式*/
+input[name="captcha"] {
+    width: 40%;
+    padding-left: 8px;
+}
+
+/*提交按钮样式*/
+#clickable {
+    text-align: center;
+}
+
+input[type="submit"] {
+    color: #f8f8f8;
+    outline: none;
+    height: 46px;
+    font-size: 20px;
+    border-radius: 100px;
+    background-color: #00a2db;
+    border: none;
+}
+
+input[type="submit"]:hover {
+    background: #0075b9;
+}
+
+/*登录链接样式*/
+a, a:visited {
+    display: block;
+    color: #0075b9;
+    text-decoration: none;
+}
+
+a:hover {
+    display: block;
+    color: #00a2db;
+}
+
+/*提示框样式*/
+.promptInfo {
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 475px;
+    width: 260px;
+    height: 30px;
+    padding-left: 8px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.promptInfo::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: -8px;
+    border-left: 0;
+    border-right: 8px solid;
+    border-top: transparent 5px solid;
+    border-bottom: transparent 5px solid;
+}
+
+/*状态样式*/
+.error {
+    background: #ff6161;
+}
+
+.error::before {
+    border-right-color: #ff6161;
+}
+
+.prompt {
+    background: #30a6f5;
+}
+
+.prompt::before {
+    border-right-color: #30a6f5;
+}
+
+.correct {
+    background: #81c763;
+}
+
+.correct::before {
+    border-right-color: #81c763;
+}
+
+#lastCheckInfo {
+    color: #ff6161;
+    font-size: 12px;
+    display: none;
+}
