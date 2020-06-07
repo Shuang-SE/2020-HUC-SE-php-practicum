@@ -50,6 +50,68 @@
             return false;
         }
 
+        function getBriefUserById($id) {
+            $db = $this->getDB();
+            if ($stmt = $db->prepare('select username, icon from user where id = :id')) {
+                $stmt->execute([
+                    'id' => $id
+                ]);
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            return false;
+        }
+
+        /**
+         * @param $username
+         * @param $password
+         * @return bool|mixed
+         */
+        function getUserId($username, $password) {
+            $db = $this->getDB();
+            if ($stmt = $db->prepare(
+                'select id from user where username = :username and password = :password'
+            )) {
+                $stmt->execute([
+                    'username' => $username,
+                    'password' => $password
+                ]);
+                if ($res = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    return $res['id'];
+                }
+            }
+            return false;
+        }
+
+        function isDuplicated($username) {
+            $db = $this->getDB();
+            if ($stmt = $db->prepare(
+                'select count(*) as c from user where username = :username'
+            )) {
+                $stmt->execute([
+                    'username' => $username
+                ]);
+                if ($res = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    return $res['c'] > 0;
+                }
+            }
+            return false;
+        }
+
+        function exists($username, $password) {
+            $db = $this->getDB();
+            if ($stmt = $db->prepare(
+                'select password from user where username = :username'
+            )) {
+                $stmt->execute([
+                    'username' => $username,
+                ]);
+                if ($res = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    return password_verify($password, $res['password']);
+                }
+            }
+            return false;
+        }
+
         /**
          * insert a user info into database,
          * return FALSE if insert failed
@@ -66,11 +128,11 @@
             $db = $this->getDB();
             if ($stmt = $db->prepare(<<<INSERT
 insert into user(username, password, authority, age, contact_info, gender) 
-VALUES (:username, :password, :authority, :age, :contact_info, :gender) 
+values (:username, :password, :authority, :age, :contact_info, :gender) 
 INSERT
             )) {
                 if ($stmt->execute([
-                    'username' => $username, 'password' => $password,
+                    'username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT),
                     'authority' => $authority, 'age' => $age,
                     'contact_info' => $contactInfo, 'gender' => $gender
                 ])) {

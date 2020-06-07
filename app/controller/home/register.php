@@ -6,20 +6,27 @@
     use app\mapper\UserMapper;
 
     if ($_POST) {
-
-        $userMapper = new UserMapper();
-        $id = $userMapper->addUser('asd', 'zxc', 'user',
-            '15', 'tel: 15636624455', 'male');
-        if (!$id) {
-            $res = [
-                'err_code' => 1,
-                'err_info' => 'insert failed',
-            ];
+        $userMapper = new UserMapper;
+        if (!$userMapper->isDuplicated($_POST['username'])) {
+            $id = $userMapper->addUser($_POST['username'], $_POST['password'], $_POST['authority'],
+                $_POST['age'], $_POST['contact_info'], $_POST['gender']);
+            if (!$id) {
+                $res = [
+                    'err_code' => 1,
+                    'err_info' => 'register failed',
+                ];
+            } else {
+                $res = [
+                    'err_code' => 0,
+                    'user_id' => $id,
+                ];
+                $_SESSION['user_id'] = $id;
+            }
+            echo json_encode($res);
         } else {
-            $res = [
-                'err_code' => 0,
-                'user_id' => $id,
-            ];
+            echo json_encode([
+                'err_code' => 2,
+                'err_info' => 'duplicated username',
+            ]);
         }
-        echo json_encode($res);
     }

@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     /**
      * Gets the root path of the project
      *
