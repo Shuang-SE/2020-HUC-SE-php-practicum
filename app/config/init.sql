@@ -33,6 +33,7 @@ CREATE TABLE `book` (
   `type` varchar(20) DEFAULT NULL,
   `brief` text,
   `electronic` enum('yes','no','only') NOT NULL,
+  `icon` varchar(255) NOT NULL,
   PRIMARY KEY (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -43,7 +44,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` (`ISBN`, `name`, `author`, `press`, `publication_date`, `unit_price`, `quantity`, `type`, `brief`, `electronic`) VALUES ('9787111407010','算法导论（原书第3版）','(美)科尔曼','机械工业出版社','2013-01-01',83.20,100,'算法','　　在有关算法的书中，有一些叙述非常严谨，但不够全面；另一些涉及了大量的题材，但又缺乏严谨性。本书将严谨性和全面性融为一体，深入讨论各类算法，并着力使这些算法的设计和分析能为各个层次的读者接受。全书各章自成体系，可以作为独立的学习单元；算法以英语和伪代码的形式描述，具备初步程序设计经验的人就能看懂；说明和解释力求浅显易懂，不失深度和数学严谨性。\r\n　　全书选材经典、内容丰富、结构合理、逻辑清晰，对本科生的数据结构课程和研究生的算法课程都是非常实用的教材，在IT专业人员的职业生涯中，本书也是一本案头必备的参考书或工程实践手册。\r\n　　第3版的主要变化：\r\n　　·新增了van Emde Boas树和多线程算法，并且将矩阵基础移至附录。\r\n　　·修订了递归式（现在称为“分治策略”）那一章的内容，更广泛地覆盖分治法。\r\n　　·移除两章很少讲授的内容：二项堆和排序网络。','yes'),('9787302392644','人月神话（40周年中文纪念版）','Brooks, F. P.','清华大学出版社','2015-04-01',69.50,100,'软件工程/开发项目管理','在软件领域，很少能有像《人月神话》一样具有深远影响力和畅销不衰的著作。Brooks博士为人们管理复杂项目提供了*洞察力的见解，既有很多发人深省的观点，又有大量软件工程的实践。本书内容来自Brooks博士在IBM公司SYSTEM／360家族和OS／360中的项目管理经验，该项目堪称软件开发项目管理的典范。该书英文原版一经面世，即引起业内人士的强烈反响，后又译为德、法、日、俄、中、韩等多种文字，全球销售数百万册。确立了其在行业内的经典地位。\r\n\r\n在《人月神话》出版40年后的今天，我们重新整理了Brooks博士的经典内容，并将国内软件开发领域先行者们对《人月神话》中的实践及系统理论的使用经验和心得集结成册免费赠与大家共享，更使本书成为国内从业者的必读经典之一。\r\n\r\n本书读者包括：软件开发人员、软件项目经理、系统分析师等IT从业者。','yes');
+INSERT INTO `book` (`ISBN`, `name`, `author`, `press`, `publication_date`, `unit_price`, `quantity`, `type`, `brief`, `electronic`, `icon`) VALUES ('9787111407010','算法导论（原书第3版）','(美)科尔曼','机械工业出版社','2013-01-01',83.20,100,'算法','　　在有关算法的书中，有一些叙述非常严谨，但不够全面；另一些涉及了大量的题材，但又缺乏严谨性。本书将严谨性和全面性融为一体，深入讨论各类算法，并着力使这些算法的设计和分析能为各个层次的读者接受。全书各章自成体系，可以作为独立的学习单元；算法以英语和伪代码的形式描述，具备初步程序设计经验的人就能看懂；说明和解释力求浅显易懂，不失深度和数学严谨性。\r\n　　全书选材经典、内容丰富、结构合理、逻辑清晰，对本科生的数据结构课程和研究生的算法课程都是非常实用的教材，在IT专业人员的职业生涯中，本书也是一本案头必备的参考书或工程实践手册。\r\n　　第3版的主要变化：\r\n　　·新增了van Emde Boas树和多线程算法，并且将矩阵基础移至附录。\r\n　　·修订了递归式（现在称为“分治策略”）那一章的内容，更广泛地覆盖分治法。\r\n　　·移除两章很少讲授的内容：二项堆和排序网络。','yes',''),('9787302392644','人月神话（40周年中文纪念版）','Brooks, F. P.','清华大学出版社','2015-04-01',69.50,100,'软件工程/开发项目管理','在软件领域，很少能有像《人月神话》一样具有深远影响力和畅销不衰的著作。Brooks博士为人们管理复杂项目提供了*洞察力的见解，既有很多发人深省的观点，又有大量软件工程的实践。本书内容来自Brooks博士在IBM公司SYSTEM／360家族和OS／360中的项目管理经验，该项目堪称软件开发项目管理的典范。该书英文原版一经面世，即引起业内人士的强烈反响，后又译为德、法、日、俄、中、韩等多种文字，全球销售数百万册。确立了其在行业内的经典地位。\r\n\r\n在《人月神话》出版40年后的今天，我们重新整理了Brooks博士的经典内容，并将国内软件开发领域先行者们对《人月神话》中的实践及系统理论的使用经验和心得集结成册免费赠与大家共享，更使本书成为国内从业者的必读经典之一。\r\n\r\n本书读者包括：软件开发人员、软件项目经理、系统分析师等IT从业者。','yes','');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +75,6 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` (`book_ISBN`, `user_id`, `amount`, `payment_terms`, `delivery_method`, `order_status`) VALUES ('9787111407010',1,0,'支付宝','顺丰速运','已下单');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,11 +90,13 @@ CREATE TABLE `user` (
   `username` varchar(20) NOT NULL,
   `password` varchar(120) NOT NULL,
   `authority` enum('user','admin') NOT NULL,
+  `icon` varchar(256) NOT NULL DEFAULT '../asset/img/default-user-icon.png',
   `age` int(11) DEFAULT NULL,
   `contact_info` varchar(50) DEFAULT NULL,
   `gender` enum('male','female') DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_username_uindex` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +105,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `password`, `authority`, `age`, `contact_info`, `gender`) VALUES (1,'JonathanLee07734','1346798520','admin',21,'TEL.: +86 15636624455','male'),(2,'John Doe','1478963250','user',73,NULL,'male');
+INSERT INTO `user` (`id`, `username`, `password`, `authority`, `icon`, `age`, `contact_info`, `gender`) VALUES (13,'shuang','$2y$10$.PUdFtY7aKuhvW4rShxqI.dezOMIcb4PiiKOOOKIxxnOhNyHSZ2De','user','../asset/img/default-user-icon.png',15,'tel: 15636624455','male');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -116,4 +118,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-05  0:13:56
+-- Dump completed on 2020-06-08  9:10:42
