@@ -1,0 +1,46 @@
+#bookShelfContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.bookshelf {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bookContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px #fff solid;
+    align-items: center;
+    margin: 10px 0;
+    background-color: #fff;
+}
+
+.bookContainer:hover {
+    box-shadow: 0 0 5px #5b616c;
+}
+
+.bookContainer .cover {
+    flex-basis: 65%;
+    width: 150px;
+}
+
+.bookContainer .title {
+    flex-basis: 10%;
+}
+
+.bookContainer .author {
+    flex-basis: 10%;
+}
+
+.bookContainer .price {
+    flex-basis: 15%;
+}

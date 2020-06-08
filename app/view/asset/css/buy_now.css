@@ -1,0 +1,10 @@
+#contentContainer {
+    background-color: #c6c6c7;
+    height: 30vh;
+}
+
+#mainFrame {
+    width: 80%;
+    margin: 0 auto;
+    background-color: lightslategrey;
+}

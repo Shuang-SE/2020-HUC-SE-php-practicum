@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    background-color: #e8ecef;
+}
+
+#topContainer {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0 5px 5px #c6c6c7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#headerLeft, #headerRight {
+    flex-basis: 10%;
+}
+
+#headerWrapper {
+    flex-basis: 80%;
+}
+
+#contentContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    top: 75px;
+    z-index: 5;
+}

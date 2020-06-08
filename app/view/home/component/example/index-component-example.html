@@ -1,0 +1,31 @@
+<!--这些通常是index页面的元素, 不要在其他页面动态生成这些组件-->
+<!--在ul#classList中可以添加图书分类信息-->
+<ul id="classList">
+    <!--通常这个href="url"是要加参数的, 通过get在后端获得参数处理, 生成不同的页面-->
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+    <li><a href="#">图书分类</a></li>
+</ul>
+
+<!--ul#classNav是类别横向导航条, 只显示10个类别(如果有更多的话)-->
+<ul id="classNav">
+    <!--li.on表示当前激活的条目, 同时只能有一个, 其余是off-->
+    <!--对于classTitle0~9..., 显然, 这应该是在js的循环中产生的, 要求具有一定的规律-->
+    <li class="classTitle0 on"><span>图书分类</span></li>
+    <li class="classTitle1 off"><span>图书分类</span></li>
+    <li class="classTitle2 off"><span>图书分类</span></li>
+    <li class="classTitle3 off"><span>图书分类</span></li>
+    <li class="classTitle4 off"><span>图书分类</span></li>
+    <li class="classTitle5 off"><span>图书分类</span></li>
+    <li class="classTitle6 off"><span>图书分类</span></li>
+    <li class="classTitle7 off"><span>图书分类</span></li>
+    <li class="classTitle8 off"><span>图书分类</span></li>
+    <li class="classTitle9 off"><span>图书分类</span></li>
+</ul>
