@@ -6,7 +6,7 @@
     use app\mapper\UserMapper;
 
     if ($_GET) {
-        if ($_SESSION['is_admin']) {
+        if (!empty($_SESSION['is_admin'])) {
             $userMapper = new UserMapper;
             echo json_encode([
                 'err_code' => 0,
@@ -15,7 +15,7 @@
         } else {
             echo json_encode([
                 'err_code' => 1,
-                'err_info' => 'no authority, this page is only accessible for administrator',
+                'data' => 'no authority, this page is only accessible for administrator',
             ]);
         }
     }

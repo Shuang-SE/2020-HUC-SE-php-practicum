@@ -12,9 +12,12 @@
         function getBooks(string $name = null) {
             $db = $this->getDB();
             if ($name) {
-                if ($stmt = $db->prepare('select * from book where name = :name')) {
+                if ($stmt = $db->prepare('select book.*, type.name as type 
+                                                        from book, type 
+                                                        where book.name like :name 
+                                                          and type_id = type.id')) {
                     $stmt->execute([
-                        'name' => $name
+                        'name' => "%$name%"
                     ]);
                 }
             } else {
@@ -29,18 +32,52 @@
         function getBriefBooks(string $name = null) {
             $db = $this->getDB();
             if ($name) {
-                if ($stmt = $db->prepare('select ISBN, name, type, unit_price, icon from book where name = :name')) {
+                if ($stmt = $db->prepare('select ISBN, book.name, type.name as type, unit_price, cover 
+                                                        from book, type 
+                                                        where book.name like :name 
+                                                          and type_id = type.id')) {
                     $stmt->execute([
-                        'name' => $name
+                        'name' => "%$name%"
                     ]);
                 }
             } else {
-                $stmt = $db->query('select ISBN, name, type, unit_price, icon from book');
+                $stmt = $db->query('select ISBN, name, type_id, unit_price, cover from book');
             }
             if ($stmt) {
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
             return null;
+        }
+
+        function getPagesOfBooks(int $page = 1, int $size = 10, string $keyword = null, string $type = null) {
+            $db = $this->getDB();
+            $start = $size * ($page - 1);
+            $params = [
+                'keyword' => "%$keyword%",
+            ];
+            $tmp = '';
+            if (!empty($type)) {
+                $tmp = ' and type.name = :type ';
+                $params['type'] = $type;
+            }
+            $sql = "select ISBN, book.name, unit_price, cover, type.name as type 
+                    from book, type 
+                    where type_id = type.id 
+                      " . $tmp . "
+                      and (
+                        ISBN like :keyword or
+                        book.name like :keyword or
+                        type.name like :keyword
+                      )                    
+                    limit $start, $size";
+            if ($stmt = $db->prepare($sql)) {
+                if ($stmt->execute($params)) {
+                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                } else {
+                    return $stmt->errorInfo();
+                }
+            }
+            return $db->errorInfo();
         }
 
         function getBookByISBN($ISBN) {
@@ -54,9 +91,12 @@
             return false;
         }
 
-        function getBriefUserByISBN($ISBN) {
+        function getBriefBookByISBN($ISBN) {
             $db = $this->getDB();
-            if ($stmt = $db->prepare('select ISBN, name, type, unit_price, icon from book where ISBN = :ISBN')) {
+            if ($stmt = $db->prepare('select ISBN, book.name, type.name as type, unit_price, cover 
+                                                    from book, type 
+                                                    where ISBN = :ISBN 
+                                                      and type_id = type.id')) {
                 $stmt->execute([
                     'ISBN' => $ISBN
                 ]);
@@ -87,7 +127,7 @@
             if ($stmt = $db->prepare(<<<INSERT
 insert into book(
                  ISBN, name, author, press, publication_date, 
-                 unit_price, quantity, type, brief, electronic, icon
+                 unit_price, quantity, type, brief, electronic, cover
                  ) 
 values (
         :ISBN, :name, :author, :press, :publication_date, 
