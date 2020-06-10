@@ -2,16 +2,16 @@
 <div id="bookshelfContainer">
     <!--必须要有ul.bookshelf, 代表整个书架, 其余class依据需求自行添加-->
     <ul class="classContent0 bookshelf display">
-        <!--一个li.bookContainer是一本书-->
+        <!--li.bookContainer是一本书-->
         <li class="bookContainer">
-            <!--一个img.cover是封面-->
-            <img src="#" class="cover" alt="book name"/>
-            <!--一个span.title是标题-->
+            <!--img.cover是封面, a用来跳转详情页-->
+            <a href="#" title="书名"><img src="#" class="cover" alt="书名"/></a>
+            <!--span.title是标题-->
             <span class="title">测试...</span>
-            <!--一个span.author是作者-->
+            <!--span.author是作者-->
             <span class="author">测试...</span>
-            <!--一个span.price的是作者-->
-            <span class="price">109.99</span>
+            <!--span.price是价格, 其中内嵌的span.sign是单位符号-->
+            <span class="price"><span class="sign"></span>109.99</span>
         </li>
     </ul>
     <!--可以有多个书架, 但通常同时只显示一个-->

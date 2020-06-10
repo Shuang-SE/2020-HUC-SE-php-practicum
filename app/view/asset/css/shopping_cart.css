@@ -1,0 +1,63 @@
+#mainFrame {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+}
+
+#mainContainer {
+    flex-basis: 100%;
+    background-color: #f8f8f8;
+    position: relative;
+    top: 10px;
+}
+
+#shoppingCartContainer {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.shoppingCartItem {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.shoppingCartItem:hover {
+    box-shadow: 3px 3px 5px #5b616c;
+}
+
+.shoppingCartItem .titleImage img {
+    width: 100px;
+}
+
+.shoppingCartItem .title {
+    flex-basis: 40%;
+}
+
+.price .counter .totalPrice .operationContainer {
+    flex-basis: 10%;
+}
+
+.shoppingCartItem .operationContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.operationContainer .payForCartItem,
+.operationContainer .payForCartItem:visited {
+    text-decoration: none;
+    color: #ff6161;
+}
+
+.operationContainer .payForCartItem:hover {
+    color: #e1251b;
+}

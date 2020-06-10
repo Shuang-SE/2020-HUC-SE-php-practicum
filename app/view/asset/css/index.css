@@ -16,7 +16,7 @@
 }
 
 /*图书分类列表样式*/
-#classListWrapper {
+#classListContainer {
     width: 90%;
     margin: 0 auto;
     background-color: #fff;
@@ -83,11 +83,15 @@
     color: #e1251b;
 }
 
+#classList li a:hover::after {
+    border-color: #e1251b;
+}
+
 /*主显示区样式*/
-#mainWrapper {
+#mainContainer {
     width: 98%;
     margin: 0 auto;
-        background-color: #f8f8f8;
+    background-color: #f8f8f8;
     border: 1px #fff solid;
     font-size: 20px;
     position: relative;
@@ -136,11 +140,6 @@
 }
 
 /*书架布局*/
-#bookshelfContainer {
-    width: 90%;
-    margin: 20px auto;
-}
-
 .bookshelf.display {
     display: flex;
 }

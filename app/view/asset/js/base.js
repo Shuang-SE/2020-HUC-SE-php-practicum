@@ -22,14 +22,21 @@ export function retrieveScript(selector, url) {
 export function setHeader() {
     const header = $("#headerWrapper");
     loadComponent(header, "component/header.html", function() {
-        setStyle(header, "../asset/css/header.css");
+        setStyle(header, "../asset/css/component/header.css");
         retrieveScript(header, "../asset/js/header.js");
     });
 }
 
+// 导入分页栏;
+export function setPageDivider() {
+    const pageDivider = $("#pageDivider");
+    loadComponent(pageDivider, "component/page-divider.html", function() {
+        setStyle("../asset/css/component/page-divider.css");
+    })
+}
+
 export function generateBookshelf(additionalClasses, num) {
     let src = "";
-    // 到时候要查数据库, 现在是假随机;
     switch (Math.floor(Math.random() * 4)) {
         case 0:
             src = "../asset/img/default-cover/default-cover-0.jpg";
@@ -44,19 +51,29 @@ export function generateBookshelf(additionalClasses, num) {
             src = "../asset/img/default-cover/default-cover-3.jpg";
             break;
     }
-    let module =
-        `<li class="bookContainer">
-     <img src="${src}" class="cover"/>
-     <span class="title">测试...</span>
-     <span class="author">测试...</span>
-     <span class="price">109.99</span>
-     </li>`;
+
+    // 生成一本书;
+    function generateBook(data) {
+        let bookContainer = $(`<li class="bookContainer"></li>`);
+        let cover = $(`<a href="#" title=${data.title}><img class="cover" src="${data.src}" alt=''/></a>`);
+        let title = $(`<span class="title">${data.title}</span>`);
+        let author = $(`<span class="author">${data.author}</span>`);
+        let price = $(`<span class="price"><span class="sign"></span>${data.price}</span>`);
+
+        // 组装;
+        return bookContainer.append(cover, title, author, price);
+    }
 
     let bookshelf = $("<ul>", {class: `bookshelf ${additionalClasses}`});
 
     for (let i = 0; i < num; i++) {
-        let book = $(module);
-        bookshelf.append(book);
+        let data = {
+            src: src,
+            title: `标题测试${i}...`,
+            author: `作者测试${i}...`,
+            price: 109.99
+        };
+        bookshelf.append(generateBook(data));
     }
     return bookshelf;
 }

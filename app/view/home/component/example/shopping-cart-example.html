@@ -1,0 +1,39 @@
+<!--div#shoppingCartContainer是购物车容器-->
+<div id="shoppingCartContainer">
+    <!--div#infoTray是一些提示信息, 相当于一个<th>-->
+    <div id="infoTray">
+        <span id="merchandiseInfo"></span>
+        <span id="price"></span>
+        <span id="numberCounter"></span>
+        <span id="totalPrice"></span>
+    </div>
+    <!--form#shoppingCart是购物车-->
+    <form id="shoppingCart">
+        <!--div#item{index}是购物车项, {item}是标注当前项目的下标, 下同-->
+        <div id="item{index}" class="shoppingCartItem">
+            <input type="checkbox" name="check"/>
+            <input type="hidden" name="ISBN{index}" value="#"/>
+            <a id="titleImage{index}" class="titleImage" href="#" title="#"><img src="#"/></a>
+            <span class="title"></span>
+            <span id="price{index}" class="price"><span class="sign"></span></span>
+            <input type="number" name="counter{index}" class="counter" value="1"/>
+            <span id="totalPrice{index}" class="totalPrice"><span class="sign"></span></span>
+            <div class="operationContainer">
+                <a id="payForCartItem{index}" class="payForCartItem" href="#">立即付款</a>
+                <span id="deleteCartItem{index}" class="deleteCartItem">删除</span>
+            </div>
+        </div>
+        <!--div#confirmPanel是最后的操作栏, 可以用来付款或者删除购物车项目-->
+        <div id="confirmPanel">
+            <label><input type="checkbox" name="checkAll" id="selectAll"/>全选</label>
+            <!--span#deleteSelected是删除选中项目的按钮-->
+            <span id="deleteSelected"></span>
+            <!--span#selectedCounter是选中项目的计数器-->
+            <span id="selectedCounter"></span>
+            <!--span#sumPrice是一共要付款金额的显示器-->
+            <span id="sumPrice"><span class="sign"></span></span>
+            <!--input[type="submit"], 无需多说, 提交购物车, 完成付款-->
+            <input type="submit" value="去付款"/>
+        </div>
+    </form>
+</div>

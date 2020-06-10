@@ -1,6 +1,6 @@
-#bookShelfContainer {
-    display: flex;
-    flex-direction: row;
+#bookshelfContainer {
+    width: 90%;
+    margin: 20px auto;
 }
 
 .bookshelf {
@@ -26,6 +26,7 @@
 
 .bookContainer:hover {
     box-shadow: 0 0 5px #5b616c;
+    opacity: 75%;
 }
 
 .bookContainer .cover {
@@ -43,4 +44,5 @@
 
 .bookContainer .price {
     flex-basis: 15%;
+    color: #fe272e;;
 }

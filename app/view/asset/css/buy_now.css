@@ -8,3 +8,8 @@
     margin: 0 auto;
     background-color: lightslategrey;
 }
+
+#mainContainer {
+    position: relative;
+    top: 10px;
+}
