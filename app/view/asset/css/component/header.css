@@ -43,7 +43,7 @@
     height: 80%;
     outline: none;
     padding-left: 10px;
-    border: 1px solid #ff6161;
+    border: 1px solid #ff4f4f;
     border-radius: 50px;
     font-size: 20px;
 }
@@ -52,10 +52,10 @@
     width: 20%;
     height: 80%;
     outline: none;
-    border: 1px solid #ff6161;
+    border: 1px solid #ff4f4f;
     border-radius: 50px;
     color: #fff;
-    background-color: #ff6161;
+    background-color: #ff4f4f;
     font-size: 20px;
 }
 
@@ -81,7 +81,7 @@
     content: "999+";
     position: relative;
     left: 38px;
-    background-color: #ff6161;
+    background-color: #ff4f4f;
     color: #fff;
     border-radius: 50px;
     padding: 2px 5px;
@@ -116,7 +116,7 @@
     position: absolute;
     top: 20px;
     right: 0;
-    border-top: 5px #ff6161 solid;
+    border-top: 5px #ff4f4f solid;
     border-left: 5px transparent solid;
     border-right: 5px transparent solid;
 }
@@ -147,7 +147,7 @@
 
 #loginButton, #registerButton, #user,
 #userOptions li a, #userOptions li a:visited {
-    color: #ff6161;
+    color: #ff4f4f;
     text-decoration: none;
 }
 

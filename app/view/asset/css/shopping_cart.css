@@ -11,6 +11,7 @@
     top: 10px;
 }
 
+/*购物车样式*/
 #shoppingCartContainer {
     width: 95%;
     margin: 0 auto;
@@ -21,30 +22,144 @@
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
+}
+
+.shoppingCartItem {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+}
+
+.shoppingCartItem input[name="check"] {
+    margin-right: 15px;
+}
+
+.itemContent {
+    flex-basis: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     align-items: flex-start;
+    position: relative;
 }
 
 .shoppingCartItem:hover {
     box-shadow: 3px 3px 5px #5b616c;
 }
 
-.shoppingCartItem .titleImage img {
+.itemContent .titleImage img {
     width: 100px;
 }
 
-.shoppingCartItem .title {
-    flex-basis: 40%;
+.itemContent .titleImage:hover img {
+    opacity: 75%;
 }
 
-.price .counter .totalPrice .operationContainer {
+.itemContent .title {
+    flex-basis: 50%;
+    justify-self: flex-start;
+}
+
+.itemContent .title,
+.itemContent .title:visited {
+    text-decoration: none;
+    color: #5b616c;
+}
+
+.itemContent .title:hover {
+    color: #ff4f4f;
+}
+
+.titleImage, .tile, .price, .counterContainer, .totalPrice {
+    margin-right: 15px;
+}
+
+.price, .operationContainer {
     flex-basis: 10%;
 }
 
-.shoppingCartItem .operationContainer {
+.price {
+    text-align: right;
+}
+
+.totalPrice {
+    text-align: left;
+}
+
+.counterContainer, .totalPrice  {
+    flex-basis: 15%;
+}
+
+/*项目计数器样式*/
+.counterContainer {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.counterContainer .counter {
+    width: 40px;
+    height: 30px;
+    outline: none;
+    border: 1px #5b616c solid;
+    text-align: center;
+}
+
+.counterContainer .counter:focus {
+    border: 1px #ff4f4f solid;
+}
+
+.counterContainer .counterMinus,
+.counterContainer .counterAdd {
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: row;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    font-size: 20px;
+    background-color: #5b616c;
+    border: 1px #5b616c solid;
+    justify-content: center;
+    align-items: center;
+}
+
+.counterContainer .counterMinus:hover,
+.counterContainer .counterAdd:hover {
+    background-color: #ff4f4f;
+    border: 1px #ff4f4f solid;
+}
+
+/*大部分复用了购物车项目后, 微调顶栏样式*/
+#infoTray, #infoTray #titleLabel:hover,
+#infoTray #priceLabel, #infoTray #totalPriceLabel {
+    color: #5b616c;
+}
+
+#infoTray:hover {
+    box-shadow: none;
+}
+
+#infoTray #fakeTitleImage {
+    display: inline-flex;
+    width: 100px;
+    background-color: #fe272e;
+    visibility: hidden;
+}
+
+#infoTray #titleLabel {
+    margin-left: 15px;
+}
+
+#infoTray #fakeCheck {
+    visibility: hidden;
+}
+
+/*购物车项操作栏样式*/
+.itemContent .operationContainer {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -52,12 +167,62 @@
     align-items: center;
 }
 
+.operationContainer .deleteCartItem {
+    color: #5b616c;
+    cursor: pointer;
+}
+
 .operationContainer .payForCartItem,
 .operationContainer .payForCartItem:visited {
     text-decoration: none;
-    color: #ff6161;
+    color: #ff4f4f;
 }
 
+.operationContainer .deleteCartItem:hover,
 .operationContainer .payForCartItem:hover {
     color: #e1251b;
+}
+
+/*底部确认栏样式*/
+#confirmPanel {
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    color: #5b616c;
+}
+
+#confirmPanel #deleteSelected,
+#confirmPanel #selectedCounter,
+#confirmPanel #sumPrice,
+#confirmPanel #checkAll,
+#confirmPanel #payButton {
+    flex-basis: 12%;
+}
+
+#confirmPanel #deleteSelected:hover {
+    cursor: pointer;
+    color: #ff4f4f;
+}
+
+#confirmPanel #payButton {
+    color: #fff;
+    font-size: 20px;
+    background-color: #ff4f4f;
+    height: 40px;
+    outline: none;
+    border-radius: 50px;
+    border: 1px #ff4f4f solid;
+}
+
+#confirmPanel #payButton:hover {
+    background-color: #e1251b;
+}
+
+/*金额的公共样式*/
+.price, .totalPrice, #sumPrice {
+    color: #fe272e;
 }

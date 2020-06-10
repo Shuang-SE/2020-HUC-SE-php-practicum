@@ -1,31 +1,65 @@
 <!--div#shoppingCartContainer是购物车容器-->
 <div id="shoppingCartContainer">
-    <!--div#infoTray是一些提示信息, 相当于一个<th>-->
-    <div id="infoTray">
-        <span id="merchandiseInfo"></span>
-        <span id="price"></span>
-        <span id="numberCounter"></span>
-        <span id="totalPrice"></span>
+    <!--div#infoTray是一些提示信息, 相当于一个表头行-->
+    <!--这个组件是以一个购物车项目为模板做的, 目地是为了复用样式, 对齐各个信息-->
+    <div id="infoTray" class="shoppingCartItem">
+        <!--这个input应该占据空间，但是不可见-->
+        <input type="checkbox" name="check" id="fakeCheck"/>
+        <div class="itemContent">
+            <!--相比一个购物车项目, 改成了<div>, 去掉了一个内嵌img, 需要修改样式-->
+            <div id="fakeTitleImage" class="titleImage"></div>
+            <!--相比一个购物车项目, 改成了<div>, 需要修改样式-->
+            <div id="titleLabel" class="title">书名</div>
+            <span id="priceLabel" class="price"></span>
+            <div id="numberCounterLabel" class="counterContainer"></div>
+            <span id="totalPriceLabel" class="totalPrice"></span>
+            <div id="operationLabel" class="operationContainer"></div>
+        </div>
     </div>
+
     <!--form#shoppingCart是购物车-->
-    <form id="shoppingCart">
+    <form id="shoppingCart" action="./buy-now.html" method="post">
         <!--div#item{index}是购物车项, {item}是标注当前项目的下标, 下同-->
         <div id="item{index}" class="shoppingCartItem">
-            <input type="checkbox" name="check"/>
-            <input type="hidden" name="ISBN{index}" value="#"/>
-            <a id="titleImage{index}" class="titleImage" href="#" title="#"><img src="#"/></a>
-            <span class="title"></span>
-            <span id="price{index}" class="price"><span class="sign"></span></span>
-            <input type="number" name="counter{index}" class="counter" value="1"/>
-            <span id="totalPrice{index}" class="totalPrice"><span class="sign"></span></span>
-            <div class="operationContainer">
-                <a id="payForCartItem{index}" class="payForCartItem" href="#">立即付款</a>
-                <span id="deleteCartItem{index}" class="deleteCartItem">删除</span>
+            <!--input[name="check"]用来标识购物车项是否勾选, 绑定一些处理事件等-->
+            <input type="checkbox" name="check" id="itemCheck{index}"/>
+            <!--div.itemContent是购物车项的内容-->
+            <div class="itemContent">
+                <!--input[name="ISBN{index}"]是隐含的ISBN, 用这个字段可以从数据库拿到相应的信息-->
+                <input type="hidden" name="ISBN{index}" value="#"/>
+                <!--input[name="totalPrice{index}"]是隐含的总金额, 用这个字段可以给数据库相应的信息-->
+                <input type="hidden" name="totalPrice{index}" value="#"/>
+                <!--a.titleImage是图书封面-->
+                <a id="titleImage{index}" class="titleImage" href="#" title="#"><img src="#"/></a>
+                <!--a.title是书名-->
+                <a class="title" href="#" title="#">书名</a>
+                <!--span#price是单价-->
+                <span id="price{index}" class="price"><span class="sign"></span></span>
+                <!--div.counterContainer是计数器, 用于选择一个项目买多少-->
+                <div class="counterContainer">
+                    <!--span.counterMinus是-按钮, 用于减少一个项目数量-->
+                    <span id="counterMinus{index}" class="counterMinus">-</span>
+                    <!--input.counter是计数器输入框, 用于输入或显示项目数量-->
+                    <input type="text" name="counter{index}" class="counter" value="1" maxlength="3"/>
+                    <!--span.counterAdd是+按钮, 用于增加一个项目数量-->
+                    <span id="counterAdd{index}" class="counterAdd">+</span>
+                </div>
+                <!--span.totalPrice是显示当前项目的总价格的组件-->
+                <span id="totalPrice{index}" class="totalPrice"><span class="sign"></span></span>
+                <!--div.operationContainer是操作框容器, 放置一些对当前项目的操作-->
+                <div class="operationContainer">
+                    <!--span.deleteCartItem是删除按钮, 用于删除当前项目-->
+                    <span id="deleteCartItem{index}" class="deleteCartItem">删除</span>
+                    <!--a.payForCartItem是付款按钮, 跳转到付款界面进行支付-->
+                    <a id="payForCartItem{index}" class="payForCartItem" href="#">立即付款</a>
+                </div>
             </div>
         </div>
+
         <!--div#confirmPanel是最后的操作栏, 可以用来付款或者删除购物车项目-->
         <div id="confirmPanel">
-            <label><input type="checkbox" name="checkAll" id="selectAll"/>全选</label>
+            <!--input#checkAll用于全选购物车项-->
+            <label><input type="checkbox" name="checkAll" id="checkAll"/>全选</label>
             <!--span#deleteSelected是删除选中项目的按钮-->
             <span id="deleteSelected"></span>
             <!--span#selectedCounter是选中项目的计数器-->
@@ -33,7 +67,7 @@
             <!--span#sumPrice是一共要付款金额的显示器-->
             <span id="sumPrice"><span class="sign"></span></span>
             <!--input[type="submit"], 无需多说, 提交购物车, 完成付款-->
-            <input type="submit" value="去付款"/>
+            <input type="submit" value="去付款" id="payButton"/>
         </div>
     </form>
 </div>

@@ -1,0 +1,4 @@
+.counterContainer .counter {
+    flex-basis: 100%;
+    border: none;
+}

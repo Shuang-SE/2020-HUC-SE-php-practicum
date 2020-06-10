@@ -1,0 +1,45 @@
+<!--form#shoppingCart是确认付款界面的订单项容器, 以购物车容器为模板生成, 只有几处小的改动-->
+<!--关于组件详解就不列出了, 只标注改动的地方, 请对照购物车组件使用-->
+<div id="shoppingCartContainer">
+    <div id="infoTray" class="shoppingCartItem">
+        <!--删去input[name="check"], 其余不变-->
+    </div>
+
+    <form id="shoppingCart" action="#" method="post">
+        <div id="item{index}" class="shoppingCartItem">
+            <!--删去input[name="check"]-->
+            <div class="itemContent">
+                <div class="operationContainer">
+                    <span id="deleteCartItem{index}" class="deleteCartItem">删除</span>
+                    <!--删去a.payForCartItem-->
+                </div>
+            </div>
+        </div>
+
+        <div id="confirmPanel">
+            <!--删去input#checkAll-->
+            <!--删去span#deleteSelected-->
+            <!--删去span#selectedCounter-->
+            <span id="sumPrice"><span class="sign"></span></span>
+            <!--input[type="submit"]改成input[type="button"], 用于弹出modal窗体, 完成付款-->
+            <input type="button" value="确认付款" id="payButton"/>
+        </div>
+
+        <!--div#confirmPayModal是点击付款按钮后, 确认付款方式的modal窗体-->
+        <!--该窗体基本定死, 不做过多说明, 直接使用即可, 要动态生成的原因在于它应位于购物车form里面-->
+        <div id="confirmModal">
+            <div id="modalContainer">
+                <div id="payMethods">
+                    <input type="radio" name="payMethod" id="aliPay" checked/><label for="aliPay">支付宝</label>
+                    <input type="radio" name="payMethod" id="weChat"/><label for="weChat">微信</label>
+                    <input type="radio" name="payMethod" id="unionPay"/><label for="unionPay">银联</label>
+                    <input type="radio" name="payMethod" id="Visa"/><label for="Visa">Visa</label>
+                </div>
+                <div id="modalButtonContainer">
+                    <input type="submit" value="确定"/>
+                    <input type="button" value="取消"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

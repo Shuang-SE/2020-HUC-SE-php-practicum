@@ -29,7 +29,7 @@
 #classListTitle {
     text-align: center;
     color: #fff;
-    background-color: #ff6161;
+    background-color: #ff4f4f;
     padding: 15px 0;
     margin-bottom: 5px;
 }
@@ -60,7 +60,7 @@
 }
 
 #classList li a {
-    color: #ff6161;
+    color: #ff4f4f;
     text-decoration: none;
     display: inline-block;
     width: 100%;
@@ -108,12 +108,12 @@
     padding: 5px 0 0;
     margin: 0;
     background-color: #fff;
-    border-bottom: 1px #ff6161 solid;
+    border-bottom: 1px #ff4f4f solid;
 }
 
 #classNav li {
     float: left;
-    color: #ff6161;
+    color: #ff4f4f;
     padding: 5px 5px 0;
     border: 2px transparent solid;
     position: relative;
@@ -122,7 +122,7 @@
 #classNav .on {
     color: #e1251b;
     background-color: #f8f8f8;
-    border: 2px #ff6161 solid;
+    border: 2px #ff4f4f solid;
     border-bottom: none;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;

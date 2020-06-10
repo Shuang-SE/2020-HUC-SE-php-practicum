@@ -5,7 +5,7 @@
 
 body {
     position: relative;
-    background: url("../img/background/ps-bg-image.jpeg") repeat-y center;
+    background: url("../../img/background/ps-bg-image.jpeg") repeat-y center;
     margin: 0 0;
     color: #5b616c;
 }
@@ -14,11 +14,10 @@ body {
 /*表单及表单行样式*/
 .validateBox {
     background: #fff;
-    width: 580px;
-    position: relative;
-    top: 10vh;
-    margin: 0 auto;
-    border-radius: 3%;
+    /*这个width: 100%意味着.validateBox不是顶层容器*/
+    /*其父容器应该要设定一个合理的宽度*/
+    width: 100%;
+    border-radius: 10px;
 }
 
 .validateBox form {
@@ -94,15 +93,15 @@ input[name="gender"] {
 }
 
 label[for="username"] {
-    background: url("../img/icon/user-icon.png") no-repeat center;
+    background: url("../../img/icon/user-icon.png") no-repeat center;
 }
 
 label[for="password"], label[for="rePassword"] {
-    background: url("../img/icon/password-icon.png") no-repeat center;
+    background: url("../../img/icon/password-icon.png") no-repeat center;
 }
 
 label[for="phoneNumber"] {
-    background: url("../img/icon/phone-icon.png") no-repeat center;
+    background: url("../../img/icon/phone-icon.png") no-repeat center;
 }
 
 /*性别单选框样式*/
@@ -122,16 +121,6 @@ label[for="phoneNumber"] {
 input[name="gender"]:checked + .genderRadio {
     color: #f8f8f8;
     background: #00a2db;
-}
-
-/*个人简介多行文本框样式*/
-.formRow textarea {
-    outline: none;
-    resize: none;
-    height: 100px;
-    border: 1px solid #e6e6e6;
-    border-radius: 15px;
-    padding: 10px;
 }
 
 /*验证码输入框样式*/
@@ -176,7 +165,7 @@ a:hover {
     display: block;
     position: absolute;
     top: 8px;
-    left: 475px;
+    right: -270px;
     width: 260px;
     height: 30px;
     padding-left: 8px;
@@ -200,11 +189,11 @@ a:hover {
 
 /*状态样式*/
 .error {
-    background: #ff6161;
+    background: #ff4f4f;
 }
 
 .error::before {
-    border-right-color: #ff6161;
+    border-right-color: #ff4f4f;
 }
 
 .prompt {
@@ -224,7 +213,7 @@ a:hover {
 }
 
 #lastCheckInfo {
-    color: #ff6161;
+    color: #ff4f4f;
     font-size: 12px;
     display: none;
 }

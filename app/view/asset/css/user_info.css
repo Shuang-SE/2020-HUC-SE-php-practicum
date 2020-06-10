@@ -1,0 +1,13 @@
+#mainFrame {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+}
+
+#mainContainer {
+    flex-basis: 100%;
+    background-color: #f8f8f8;
+    height: 100vh;
+    position: relative;
+    top: 10px;
+}

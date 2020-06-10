@@ -1,0 +1,31 @@
+<!--form#shoppingCart是确认付款界面的订单项容器, 以购物车容器为模板生成, 只有几处小的改动-->
+<!--关于组件详解就不列出了, 只标注改动的地方, 请对照购物车组件使用-->
+<div id="shoppingCartContainer">
+    <div id="infoTray" class="shoppingCartItem">
+        <!--删去input[name="check"]-->
+        <!--div#operationLabel的html应改为"创建时间", 其余不变-->
+        <div id="operationLabel" class="operationContainer">创建时间</div>
+    </div>
+
+    <form id="shoppingCart" action="#" method="post">
+        <div id="item{index}" class="shoppingCartItem">
+            <!--删去input[name="check"]-->
+            <div class="itemContent">
+                <div class="counterContainer">
+                    <!--删去span.counterMinus-->
+                    <!--input.counter改为span.counter, 用于显示项目数量-->
+                    <span id="counter{index}" class="counter"></span>
+                    <!--删去span.counterAdd-->
+                </div>
+                <div class="operationContainer">
+                    <!--新增span.itemCreateTime, 用于显示项目创建时间-->
+                    <span id="itemCreateTime{index}" class="itemCreateTime"></span>
+                    <!--删去span.deleteCartItem-->
+                    <!--删去a.payForCartItem-->
+                </div>
+            </div>
+        </div>
+
+        <!--删去div#confirmPanel, 即没有底栏-->
+    </form>
+</div>

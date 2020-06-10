@@ -26,7 +26,7 @@
 #rankListTitle {
     text-align: center;
     color: #fff;
-    background-color: #ff6161;
+    background-color: #ff4f4f;
     padding: 15px 0;
     margin-bottom: 5px;
 }
@@ -113,12 +113,12 @@
 }
 
 #rankList .rankContent .title:hover {
-    color: #ff6161;
+    color: #ff4f4f;
 }
 
 /*封面图片和标题的关联样式*/
 #rankList .unfold .rankContent .titleImage:hover + .itemInfo .title {
-    color: #ff6161;
+    color: #ff4f4f;
 }
 
 .unfold .rankContent .price {
