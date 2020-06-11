@@ -121,6 +121,17 @@
             return false;
         }
 
+        function isAdmin($userId) {
+            $db = $this->getDB();
+            $sql = 'select authority from user where id = :user_id';
+            if ($stmt = $db->prepare($sql)) {
+                if ($stmt->execute(['user_id' => $userId])) {
+                    return $stmt->fetch(PDO::FETCH_ASSOC)['authority'] === 'admin';
+                }
+            }
+            return false;
+        }
+
         /**
          * insert a user info into database,
          * return FALSE if insert failed

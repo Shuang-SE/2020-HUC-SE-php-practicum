@@ -1,7 +1,11 @@
 <?php
     /**
      * 获取用户全部订单
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getOrders.php
      *
+     * return:
+     *     err_code,
+     *     data: [{order_id, ISBN, amount, order_status, book_name, unit_price, total_price}, ...]
      */
 
     require_once '../../lib/common.php';

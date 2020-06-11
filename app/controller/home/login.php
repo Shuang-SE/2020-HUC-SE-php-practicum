@@ -1,11 +1,14 @@
 <?php
     /**
-     * 普通用户登录接口
+     * 用户登录接口
      * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/login.php
      *
      * parameters:
      *     post: username, password, captcha
-     *
+     * return:
+     *     user_id and is_admin in session
+     *     err_code,
+     *     err_info
      */
 
     require_once '../../lib/common.php';
@@ -25,10 +28,18 @@
             $userMapper = new UserMapper;
             if (check($userMapper)) {
                 $_SESSION['user_id'] = $userMapper->getUserId($_POST['username'], $_POST['password']);
-                echo json_encode([
-                    'err_code' => 0,
-                    'err_info' => 'fine.',
-                ]);
+                if ($userMapper->isAdmin($_SESSION['user_id'])) {
+                    $_SESSION['is_admin'] = true;
+                    echo json_encode([
+                        'err_code' => 0,
+                        'err_info' => 'admin',
+                    ]);
+                } else {
+                    echo json_encode([
+                        'err_code' => 0,
+                        'err_info' => 'user',
+                    ]);
+                }
             } else {
                 echo json_encode([
                     'err_code' => 2,

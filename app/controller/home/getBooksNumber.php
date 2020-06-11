@@ -1,4 +1,15 @@
 <?php
+    /**
+     * 获取搜索项/全部书籍的数目
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getBooksNumber.php
+     *
+     * parameters:
+     *     get: [keyword, type]optional
+     *
+     * return:
+     *     err_code,
+     *     data: int
+     */
 
     require_once '../../lib/common.php';
     require_once getRootPath() . '/app/mapper/BookMapper.php';
