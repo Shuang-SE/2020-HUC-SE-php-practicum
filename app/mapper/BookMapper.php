@@ -54,7 +54,7 @@
                 $tmp = ' and type . name = :type ';
                 $params['type'] = $type;
             }
-            $sql = "select ISBN, book.name, unit_price, cover, type.name as type 
+            $sql = "select ISBN, book.name, author, unit_price, cover, type.name as type 
                     from book, type 
                     where type_id = type.id 
                       " . $tmp . "
