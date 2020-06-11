@@ -9,17 +9,28 @@
 
     class BookMapper extends Model {
 
-        function count($type = null) {
+        function count($keyword = null, $type = null) {
             $sql = 'select count(*) as c from book';
             $params = [];
             if (!empty($type)) {
-                $sql .= ', type where type_id = type.id and type.name = :type';
+                $sql .= ', type where type_id = type.id and type.name = :type ';
                 $params['type'] = $type;
+            } else {
+                $sql .= ' where 1 = 1';
+            }
+            if (!empty($keyword)) {
+                $sql .= ' and (
+                        book.ISBN like :keyword or
+                        book.name like :keyword
+                        )';
+                $params['keyword'] = "%$keyword%";
             }
             $db = $this->getDB();
             if ($stmt = $db->prepare($sql)) {
                 if ($stmt->execute($params)) {
                     return $stmt->fetch(PDO::FETCH_ASSOC)['c'];
+                } else {
+                    return $stmt->errorInfo();
                 }
             }
             return false;
@@ -49,8 +60,7 @@
                       " . $tmp . "
                       and (
                         ISBN like :keyword or
-                        book.name like :keyword or
-                        type.name like :keyword
+                        book.name like :keyword
                       )                    
                     limit $start, $size";
             if ($stmt = $db->prepare($sql)) {

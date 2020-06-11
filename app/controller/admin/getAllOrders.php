@@ -1,16 +1,15 @@
 <?php
-
     require_once '../../lib/common.php';
-    require_once getRootPath() . '/app/mapper/UserMapper.php';
+    require_once getRootPath() . '/app/mapper/OrderMapper.php';
 
-    use app\mapper\UserMapper;
+    use app\mapper\OrderMapper;
 
-//    if (!empty($_SESSION['is_admin'])) {
+    if (!empty($_SESSION['is_admin'])) {
         if ($_GET) {
-            $userMapper = new UserMapper;
+            $orderMapper = new OrderMapper();
             echo json_encode([
                 'err_code' => 0,
-                'data' => $userMapper->getUsers(),
+                'data' => $orderMapper->getAllOrders(),
             ]);
         } else {
             echo json_encode([
@@ -18,4 +17,4 @@
                 'data' => 'no authority, this page is only accessible for administrator',
             ]);
         }
-//    }
+    }

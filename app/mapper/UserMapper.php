@@ -19,13 +19,13 @@
         function getUsers(string $username = null) {
             $db = $this->getDB();
             if ($username) {
-                if ($stmt = $db->prepare('select * from user where username like :username')) {
+                if ($stmt = $db->prepare('select id, username, age, gender,contact_info, authority from user where username like :username')) {
                     $stmt->execute([
                         'username' => "%$username%"
                     ]);
                 }
             } else {
-                $stmt = $db->query('select * from user');
+                $stmt = $db->query('select id, username, age, gender,contact_info, authority from user');
             }
             if ($stmt) {
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -82,6 +82,10 @@
             return false;
         }
 
+        /**
+         * @param $username
+         * @return bool
+         */
         function isDuplicated($username) {
             $db = $this->getDB();
             if ($stmt = $db->prepare(
@@ -97,6 +101,11 @@
             return false;
         }
 
+        /**
+         * @param $username
+         * @param $password
+         * @return bool
+         */
         function exists($username, $password) {
             $db = $this->getDB();
             if ($stmt = $db->prepare(
@@ -139,4 +148,67 @@ INSERT
             }
             return false;
         }
+
+        /**
+         * @param string $username
+         * @param string $age
+         * @param string $contactInfo
+         * @param string $gender
+         * @return bool
+         */
+        function updateUser(string $id, string $username, string $age, string $contactInfo, string $gender) {
+            $db = $this->getDB();
+            $result = false;
+            if ($stmt = $db->prepare(<<<UPDATE
+update user set username = :username, age = :age, contact_info = :contact_info, gender = :gender 
+where id = :user_id
+UPDATE
+            )) {
+                if ($stmt->execute([
+                    'username' => $username, 'age' => $age, 'contact_info' => $contactInfo,
+                    'gender' => $gender, 'user_id' => $_SESSION['user_id'],
+                ])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function updatePassword($id, $password) {
+            $db = $this->getDB();
+            if (!empty($password)) {
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                if ($stmt = $db->prepare(<<<UPDATE
+update user set password = :password where id = :user_id 
+UPDATE
+                )) {
+                    if ($stmt->execute([
+                        'password' => $password,
+                        'user_id' => $id,
+                    ])) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        function updateIcon($id, $icon) {
+            $db = $this->getDB();
+            if (!empty($cover)) {
+                if ($stmt = $db->prepare(<<<UPDATE
+update user set icon = :icon where id = :user_id
+UPDATE
+                )) {
+                    if ($stmt->execute([
+                        'icon' => $icon,
+                        'user_id' => $id,
+                    ])) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
