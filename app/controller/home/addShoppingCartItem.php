@@ -5,8 +5,8 @@
 
     use app\mapper\OrderMapper;
 
-    if (!empty($_SESSION['user_id'])) {
-        if (!empty($_POST)) {
+    if (isset($_SESSION['user_id'])) {
+        if (isset($_POST)) {
             $userId = $_SESSION['user_id'];
 
             $orderMapper = new OrderMapper;

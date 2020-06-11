@@ -5,8 +5,8 @@
 
     use app\mapper\OrderMapper;
 
-    if (!empty($_SESSION['user_id'])) {
-        if (!empty($_POST['order_id'])) {
+    if (isset($_SESSION['user_id'])) {
+        if (isset($_POST['order_id'])) {
             $orderMapper = new OrderMapper;
             if ($orderMapper->deleteShoppingCartItem($_POST['order_id'])) {
                 echo json_encode([

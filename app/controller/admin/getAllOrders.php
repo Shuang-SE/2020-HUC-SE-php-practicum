@@ -4,7 +4,7 @@
 
     use app\mapper\OrderMapper;
 
-    if (!empty($_SESSION['is_admin'])) {
+    if (isset($_SESSION['is_admin'])) {
         if ($_GET) {
             $orderMapper = new OrderMapper();
             echo json_encode([

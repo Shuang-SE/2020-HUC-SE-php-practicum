@@ -126,7 +126,9 @@
             $sql = 'select authority from user where id = :user_id';
             if ($stmt = $db->prepare($sql)) {
                 if ($stmt->execute(['user_id' => $userId])) {
-                    return $stmt->fetch(PDO::FETCH_ASSOC)['authority'] === 'admin';
+                    if ($res = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        return $res['authority'] === 'admin';
+                    }
                 }
             }
             return false;

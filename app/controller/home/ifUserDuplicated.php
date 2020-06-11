@@ -4,7 +4,7 @@
 
     use app\mapper\UserMapper;
 
-    if (!empty($_GET) && !empty($_GET['username'])) {
+    if (isset($_GET) && isset($_GET['username'])) {
         $userMapper = new UserMapper;
         if (!$userMapper->isDuplicated($_GET['username'])) {
             echo json_encode([

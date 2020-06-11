@@ -26,8 +26,9 @@
     if ($_POST) {
         $userMapper = new UserMapper;
         if (check($userMapper)) {
-            $_SESSION['user_id'] = $userMapper->getUserId($_POST['username'], $_POST['password']);
-            if ($userMapper->isAdmin($_SESSION['user_id'])) {
+            $userId = $userMapper->getUserId($_POST['username'], $_POST['password']);
+            $_SESSION['user_id'] = $userId;
+            if ($userMapper->isAdmin($userId)) {
                 $_SESSION['is_admin'] = true;
                 echo json_encode([
                     'err_code' => 0,

@@ -1,6 +1,10 @@
 <?php
     /**
      * 将购物车中的商品放置到订单中
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/addOrder.php
+     *
+     * parameters:
+     *     post: order_id, payment_term, delivery_method
      */
 
     require_once '../../lib/common.php';
@@ -8,8 +12,8 @@
 
     use app\mapper\OrderMapper;
 
-    if (!empty($_SESSION['user_id'])) {
-        if (!empty($_POST)) {
+    if (isset($_SESSION['user_id'])) {
+        if (isset($_POST)) {
             $userId = $_SESSION['user_id'];
 
             $orderMapper = new OrderMapper;

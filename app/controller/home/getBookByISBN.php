@@ -17,8 +17,8 @@
 
     use app\mapper\BookMapper;
 
-    if (!empty($_GET)) {
-        if (!empty($_GET['ISBN'])) {
+    if (isset($_GET)) {
+        if (isset($_GET['ISBN'])) {
             $isbn = $_GET['ISBN'];
             $bookMapper = new BookMapper;
             echo json_encode([

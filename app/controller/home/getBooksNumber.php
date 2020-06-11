@@ -16,7 +16,7 @@
 
     use app\mapper\BookMapper;
 
-    if (!empty($_GET)) {
+    if (isset($_GET)) {
         $bookMapper = new BookMapper;
         $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : null;
         $type = isset($_GET['type']) ? $_GET['type'] : null;

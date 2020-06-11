@@ -18,8 +18,8 @@
 
     use app\mapper\BookMapper;
 
-    if (!empty($_GET)) {
-        if (!empty($_GET['size']) && !empty($_GET['page'])) {
+    if (isset($_GET)) {
+        if (isset($_GET['size']) && isset($_GET['page'])) {
             $page = $_GET['page'];
             $size = $_GET['size'];
             $bookMapper = new BookMapper;
