@@ -1,7 +1,7 @@
 <?php
     /**
-     * 获取用户全部订单
-     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getOrders.php
+     * 获取用户购物车项
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getShoppingCart.php
      *
      * return:
      *     err_code,
@@ -17,7 +17,7 @@
         $orderMapper = new OrderMapper;
         echo json_encode([
             'err_code' => 0,
-            'data' => $orderMapper->getOrdersByUserId($_SESSION['user_id']),
+            'data' => $orderMapper->getShoppingCartByUserId($_SESSION['user_id']),
         ]);
     } else {
         echo json_encode([

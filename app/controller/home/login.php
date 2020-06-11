@@ -4,7 +4,7 @@
      * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/login.php
      *
      * parameters:
-     *     post: username, password, captcha
+     *     post: username, password
      * return:
      *     user_id and is_admin in session
      *     err_code,

@@ -1,4 +1,7 @@
 <?php
+    /**
+     * 将购物车中的商品放置到订单中
+     */
 
     require_once '../../lib/common.php';
     require_once getRootPath() . '/app/mapper/OrderMapper.php';

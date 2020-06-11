@@ -43,18 +43,56 @@
             return false;
         }
 
-        function countByUserId($userId) {
+        function getShoppingCartByUserId($userId) {
             $db = $this->getDB();
-            $sql = 'select count(*) from `order` where user_id = :user_id';
+            $sql = 'select `order`.id as order_id, book.name as book_name, amount, unit_price, 
+                    total_price, payment_terms, delivery_method, date, cover
+                    from `order`, book, user 
+                    where user_id = :user_id 
+                      and book.ISBN = book_ISBN 
+                      and user_id = user.id 
+                      and order_status = \'未付款\'';
             if ($stmt = $db->prepare($sql)) {
                 if ($stmt->execute([
-                    'user_id' => $userId
+                    'user_id' => $userId,
                 ])) {
-                    return $stmt->rowCount();
+                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
             }
             return false;
         }
+
+        function getOrdersByUserId($userId) {
+            $db = $this->getDB();
+            $sql = 'select `order`.id as order_id, book.name as book_name, amount, unit_price, 
+                    total_price, payment_terms, delivery_method, date, cover
+                    from `order`, book, user 
+                    where user_id = :user_id 
+                      and book.ISBN = book_ISBN 
+                      and user_id = user.id 
+                      and order_status = \'已付款\'';
+            if ($stmt = $db->prepare($sql)) {
+                if ($stmt->execute([
+                    'user_id' => $userId,
+                ])) {
+                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                }
+            }
+            return false;
+        }
+
+//        function countByUserId($userId) {
+//            $db = $this->getDB();
+//            $sql = 'select count(*) from `order` where user_id = :user_id';
+//            if ($stmt = $db->prepare($sql)) {
+//                if ($stmt->execute([
+//                    'user_id' => $userId
+//                ])) {
+//                    return $stmt->rowCount();
+//                }
+//            }
+//            return false;
+//        }
 
         /**
          * @param $userId
