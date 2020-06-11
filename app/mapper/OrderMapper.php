@@ -14,7 +14,7 @@
          */
         function getAllOrders() {
             $db = $this->getDB();
-            $sql = 'select `order`.id, amount, order_status, book.name, book.unit_price, total_price 
+            $sql = 'select `order`.id as order_id, amount, order_status, book.name as book_name, book.unit_price, total_price 
                     from book, `order`, user 
                     where user.id = user_id 
                       and book.ISBN = book_ISBN ';
@@ -111,12 +111,30 @@
             return false;
         }
 
-        function deleteOrderOrShoppingCartItem($orderId) {
+        function deleteOrder($orderId) {
             $db = $this->getDB();
-            $sql = 'update `order` set order_status = \'已删除\' where id = :order_id';
-            if($stmt = $db->prepare($sql)) {
-
+            $sql = 'update `order` set order_status = \'已退货\' where id = :order_id';
+            if ($stmt = $db->prepare($sql)) {
+                if ($stmt->execute([
+                    'order_id' => $orderId,
+                ])) {
+                    return $stmt->rowCount();
+                }
             }
+            return false;
+        }
+
+        function deleteShoppingCartItem($orderId) {
+            $db = $this->getDB();
+            $sql = 'delete from `order` where id = :order_id';
+            if ($stmt = $db->prepare($sql)) {
+                if ($stmt->execute([
+                    'order_id' => $orderId,
+                ])) {
+                    return $stmt->rowCount();
+                }
+            }
+            return false;
         }
 
     }

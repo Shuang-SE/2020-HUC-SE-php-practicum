@@ -6,24 +6,16 @@
     use app\mapper\OrderMapper;
 
     if (!empty($_SESSION['user_id'])) {
-        if (!empty($_POST)) {
-            $userId = $_SESSION['user_id'];
-
+        if (!empty($_POST['order_id'])) {
             $orderMapper = new OrderMapper;
-            if ($orderMapper->addToShoppingCart(
-                $userId, $_POST['ISBN'], $_POST['amount'], $_POST['total_price']
-            )) {
+            if ($orderMapper->deleteOrder($_POST['order_id'])) {
                 echo json_encode([
                     'err_code' => 0,
-                    'err_info' => 'succeed',
                 ]);
             } else {
                 echo json_encode([
                     'err_code' => 1,
-                    'err_info' => 'failed',
                 ]);
             }
         }
     }
-
-
