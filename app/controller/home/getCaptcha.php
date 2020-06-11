@@ -1,5 +1,11 @@
 <?php
+    /**
+     * 获取session中保存的验证码字符串
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getCaptcha.php
+     */
+
     require_once '../../lib/common.php';
+
     if ($_GET) {
         if (isset($_SESSION['captcha'])) {
             $json = [

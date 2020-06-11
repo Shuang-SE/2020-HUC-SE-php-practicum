@@ -1,4 +1,18 @@
 <?php
+    /**
+     * 获取当前用户的资料
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getProfile.php
+     *
+     * parameters:
+     *     get: [brief] (get brief user information if set)
+     *
+     * return:
+     *     err_code,
+     *     [data (if err_code == 0)]
+     *         brief: [username, icon],
+     *         total: [username, password, authority, icon, age, contact_info, gender]
+     */
+
     require_once '../../lib/common.php';
     require_once getRootPath() . '/app/mapper/UserMapper.php';
 
@@ -10,7 +24,7 @@
             $userMapper = new UserMapper;
             $json = [
                 'err_code' => 0,
-                'data' => isset($_GET['brief'])
+                'data' => !empty($_GET['brief'])
                     ? $userMapper->getBriefUserById($userId)
                     : $userMapper->getUserById($userId),
             ];

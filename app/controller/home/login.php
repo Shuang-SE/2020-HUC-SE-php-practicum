@@ -1,4 +1,12 @@
 <?php
+    /**
+     * 普通用户登录接口
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/login.php
+     *
+     * parameters:
+     *     post: username, password, captcha
+     *
+     */
 
     require_once '../../lib/common.php';
     require_once getRootPath() . '/app/mapper/UserMapper.php';

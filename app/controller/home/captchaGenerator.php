@@ -1,4 +1,9 @@
 <?php
+    /**
+     * 生成注册码图片，并将注册码保存于session中
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/captchaGenerator.php
+     */
+
     require_once '../../lib/common.php';
 
     header('Content-type:image/jpeg');

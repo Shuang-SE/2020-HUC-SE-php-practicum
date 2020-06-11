@@ -1,4 +1,17 @@
 <?php
+    /**
+     * 获取书籍列表接口
+     * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getBooks.php
+     *
+     * parameters:
+     *     get: page, size, keyword, type
+     *
+     * return:
+     *     err_code,
+     *     [data (if err_code == 0)]: array of Book,
+     *         [{ISBN, name, unit_price, cover, type}...]
+     *     [err_info (if err_code != 0)]
+     */
 
     require_once '../../lib/common.php';
     require_once getRootPath() . '/app/mapper/BookMapper.php';
@@ -6,7 +19,6 @@
     use app\mapper\BookMapper;
 
     if (!empty($_GET)) {
-//        int $page = 1, int $size = 10, string $keyword = null, string $type = null
         if (!empty($_GET['size']) && !empty($_GET['page'])) {
             $page = $_GET['page'];
             $size = $_GET['size'];

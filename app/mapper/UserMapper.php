@@ -117,23 +117,21 @@
          * return FALSE if insert failed
          * @param string $username
          * @param string $password
-         * @param string $authority
          * @param string $age
          * @param string $contactInfo
          * @param string $gender
          * @return bool
          */
-        function addUser(string $username, string $password, string $authority,
-                         string $age, string $contactInfo, string $gender) {
+        function addUser(string $username, string $password, string $age, string $contactInfo, string $gender) {
             $db = $this->getDB();
             if ($stmt = $db->prepare(<<<INSERT
-insert into user(username, password, authority, age, contact_info, gender) 
-values (:username, :password, :authority, :age, :contact_info, :gender) 
+insert into user(username, password, age, contact_info, gender) 
+values (:username, :password, :age, :contact_info, :gender) 
 INSERT
             )) {
                 if ($stmt->execute([
                     'username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT),
-                    'authority' => $authority, 'age' => $age,
+                    'age' => $age,
                     'contact_info' => $contactInfo, 'gender' => $gender
                 ])) {
                     return $db->lastInsertId();
