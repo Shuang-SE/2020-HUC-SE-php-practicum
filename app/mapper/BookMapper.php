@@ -84,7 +84,7 @@
 
         function getTypes() {
             $db = $this->getDB();
-            if ($stmt = $db->query('select name as type from type')) {
+            if ($stmt = $db->query('select name as class from type')) {
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
             return false;
