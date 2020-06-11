@@ -22,16 +22,17 @@
         if ($userMapper->updateUser(
             $_SESSION['user_id'], $_POST['username'], $_POST['age'], $_POST['contactInfo'], $_POST['gender']
         )) {
-            $json['info'] .= 'update user basic succeed';
+            $json['info'] .= 'update user basic info succeed';
         } else {
             $json['err_code'] = 1;
-            $json['info'] .= 'update user basic failed';
+            $json['info'] .= 'update user basic info failed';
         }
         if (isset($_POST['password']) && !empty($_POST['password'])) {
             if ($userMapper->updatePassword($_SESSION['user_id'], $_POST['password'])) {
-
+                $json['info'] .= 'update password succeed';
             } else {
-
+                $json['err_code'] = 1;
+                $json['info'] .= 'update password failed';
             }
         }
     } else {
