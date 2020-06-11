@@ -1,8 +1,38 @@
-import {setPromptInfo, refreshCaptcha, captchaOnFocus, captchaOnBlur} from "./register_check.js";
+import {setPromptInfo, refreshCaptcha, captchaOnFocus} from "./register_login_base.js";
 
-let checkStatus = [false, false, false];
+let usernameStatus = false;
+let passwordStatus = false;
+let captchaStatus = false;
 
-$().ready(function(options) {
+// Ajax验证验证码;
+function captchaOnBlur(event) {
+    let captchaVal = event.data.captcha.val();
+    let captchaPrompt = event.data.captchaPrompt;
+    if (captchaVal === "") {
+        setPromptInfo(captchaPrompt, "请输入验证码!", "error");
+        return captchaStatus = false;
+    }
+    captchaStatus = true;
+    let captcha = "";
+    $.ajaxSettings.async = false;
+    $.get(`http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getCaptcha.php?timestamp=${new Date().valueOf()}`,
+        {},
+        function(result) {
+            if(!result['err_code']) {
+                captcha = result['captcha'];
+            }
+        }, 'json');
+    if (captchaVal.toLowerCase() !== captcha.toLowerCase()) {
+        setPromptInfo(captchaPrompt, "验证码输入有误, 请重新输入!", "error");
+        return captchaStatus = false;
+    }
+    if (captchaStatus) {
+        setPromptInfo(captchaPrompt, "验证码输入正确!", "correct");
+    }
+    return captchaStatus;
+}
+
+$().ready(function() {
     const username = $("#username");
     const usernamePrompt = $("#usernamePrompt");
     const password = $("#password");
@@ -27,9 +57,9 @@ $().ready(function(options) {
         let usernameVal = username.val();
         if(usernameVal === "") {
             setPromptInfo(usernamePrompt, "用户名不能为空!", "error");
-            return checkStatus[index] = false;
+            return usernameStatus = false;
         }
-        return checkStatus[index] = true;
+        return usernameStatus = true;
     });
 
     // 密码不能为空;
@@ -38,15 +68,15 @@ $().ready(function(options) {
         let passwordVal = password.val();
         if(passwordVal === "") {
             setPromptInfo(passwordPrompt, "请输入密码!", "error");
-            return checkStatus[index] = false;
+            return passwordStatus = false;
         }
-        return checkStatus[index] = true;
+        return passwordStatus = true;
     });
 
     // 复用来自其它模块的函数;
     captchaImage.on("click", "", {captchaImage: captchaImage}, refreshCaptcha);
     captcha.on("focus", "", {captchaPrompt: captchaPrompt}, captchaOnFocus);
-    captcha.on("blur", "", {index: 2, captcha: captcha, captchaPrompt: captchaPrompt}, captchaOnBlur);
+    captcha.on("blur", "", {captcha: captcha, captchaPrompt: captchaPrompt}, captchaOnBlur);
 
     // 表单提交前进行的最后检查, 异步验证用户名和密码的匹配性;
     form.on("submit", function() {
@@ -54,27 +84,22 @@ $().ready(function(options) {
         password.blur();
         captcha.blur();
         let flag = true;
-        checkStatus.forEach(function(status) {
-            flag = flag && status;
-        });
+        flag  = (usernameStatus && passwordStatus && captchaStatus);
         if(flag) {
-            $.ajax({
-                url: `ajax_login_check_servlet?timestamp=${new Date().valueOf()}`,
-                method: "get",
-                content: "text",
-                async: false,
-                success: function(data) {
-                    if(data === "false") {
-                        return flag = false;
+            $.ajaxSettings.async = false;
+            $.post("http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/login.php",
+                {username: username.val(), password: password.val()},
+                function(result) {
+                    if(!result['err_code']) {
+                        location.href = "./index.html";
+                        lastCheckInfo.css("display", "none");
                     }
-                }
-            });
-            if(flag) {
-                lastCheckInfo.css("display", "none");
-                return true;
-            }
+                    else {
+                        lastCheckInfo.css("display", "inline");
+                    }
+                }, 'json'
+            );
         }
-        lastCheckInfo.css("display", "inline");
         return false;
     });
 });
