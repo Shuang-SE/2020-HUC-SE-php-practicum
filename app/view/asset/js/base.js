@@ -31,12 +31,22 @@ export function setValidateBox(type) {
 }
 
 // 设置Header;
-// 规定在任何页面中, 只有div#headerWrapper才能是header的容器;
+// 规定在任何页面中, 只有div#headerContainer才能是header的容器;
 export function setHeader() {
-    const header = $("#headerWrapper");
-    loadComponent(header, "./component/header.html", function() {
-        setStyle(header, "../asset/css/component/header.css");
-        retrieveScript(header, "../asset/js/header.js");
+    const headerContainer = $("#headerContainer");
+    loadComponent(headerContainer, "./component/header.html", function() {
+        setStyle(headerContainer, "../asset/css/component/header.css");
+        retrieveScript(headerContainer, "../asset/js/header.js");
+    });
+}
+
+// 设置登录/注册的Modal窗体;
+// 规定在任何页面中, 只有div#alidateModalContainer才能是header的容器;
+export function setValidateModal() {
+    const validateModalContainer = $("#validateModalContainer");
+    loadComponent(validateModalContainer, "./component/validate-modal.html", function() {
+        setStyle(validateModalContainer, "../asset/css/component/validate_modal.css");
+        retrieveScript(validateModalContainer, "../asset/js/validate_modal.js");
     });
 }
 

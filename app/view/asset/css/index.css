@@ -5,13 +5,11 @@
 
 #leftFrame {
     flex-basis: 20%;
-    height: 100vh;
     position: relative;
 }
 
 #mainFrame {
     flex-basis: 80%;
-    height: 100vh;
     position: relative;
 }
 

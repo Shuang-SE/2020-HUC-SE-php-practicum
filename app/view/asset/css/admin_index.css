@@ -1,0 +1,67 @@
+/*框架布局样式*/
+#headerLeft {
+    flex-basis: 20%;
+}
+
+#leftFrame {
+    flex-basis: 20%;
+    position: relative;
+}
+
+#mainFrame {
+    flex-basis: 80%;
+    position: relative;
+}
+
+/*主显示区样式*/
+#mainContainer {
+    width: 98%;
+    margin: 0 auto;
+    background-color: #f8f8f8;
+    border: 1px #fff solid;
+    font-size: 20px;
+    position: relative;
+    top: 10px;
+}
+
+/*视图切换*/
+#viewButtonContainer {
+    width: 90%;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    position: relative;
+    top: 10px;
+}
+
+#viewButtonContainer input {
+    display: none;
+}
+
+#viewButtonContainer label {
+    flex-basis: 50%;
+    width: 80%;
+    color: #5b616c;
+    background-color: #fff;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#viewButtonContainer label:hover {
+    color: #5b616c;
+    background-color: #e0e0e0;
+}
+
+#viewButtonContainer input:checked + label {
+    color: #fff;
+    background-color: #ff4f4f;
+}
+
+#viewButtonContainer input:checked + label:hover {
+    opacity: 85%;
+}

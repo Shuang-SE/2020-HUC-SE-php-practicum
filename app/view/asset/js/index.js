@@ -1,8 +1,11 @@
-import {generateBookshelf, setHeader} from "./base.js";
+import {generateBookshelf, setHeader, setValidateModal} from "./base.js";
 
 $().ready(function() {
     // 导入header;
     setHeader();
+
+    // 导入验证的Modal;
+    setValidateModal();
 
     // 动态生成图书类别栏;
     function generateClassList(num) {

@@ -3,16 +3,10 @@
     -moz-box-sizing: border-box;
 }
 
-body {
-    position: relative;
-    background: url("../../img/background/ps-bg-image.jpeg") repeat-y center;
-    margin: 0 0;
-    color: #5b616c;
-}
-
 /*表单容器样式*/
 /*表单及表单行样式*/
 .validateBox {
+    color: #5b616c;
     background: #fff;
     /*这个width: 100%意味着.validateBox不是顶层容器*/
     /*其父容器应该要设定一个合理的宽度*/
@@ -170,7 +164,7 @@ a:hover {
     height: 30px;
     padding-left: 8px;
     border-radius: 5px;
-    color: #fff;
+    color: transparent;
     font-size: 12px;
     line-height: 30px;
 }
@@ -189,26 +183,32 @@ a:hover {
 
 /*状态样式*/
 .error {
+    color: #fff;
     background: #ff4f4f;
 }
 
 .error::before {
+    color: #fff;
     border-right-color: #ff4f4f;
 }
 
 .prompt {
+    color: #fff;
     background: #30a6f5;
 }
 
 .prompt::before {
+    color: #fff;
     border-right-color: #30a6f5;
 }
 
 .correct {
+    color: #fff;
     background: #81c763;
 }
 
 .correct::before {
+    color: #fff;
     border-right-color: #81c763;
 }
 
