@@ -153,8 +153,7 @@ INSERT
             )) {
                 if ($stmt->execute([
                     'username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT),
-                    'age' => $age,
-                    'contact_info' => $contactInfo, 'gender' => $gender
+                    'age' => $age, 'contact_info' => $contactInfo, 'gender' => $gender
                 ])) {
                     return $db->lastInsertId();
                 }
@@ -179,7 +178,7 @@ UPDATE
             )) {
                 if ($stmt->execute([
                     'username' => $username, 'age' => $age, 'contact_info' => $contactInfo,
-                    'gender' => $gender, 'user_id' => $_SESSION['user_id'],
+                    'gender' => $gender, 'user_id' => $id,
                 ])) {
                     return true;
                 }

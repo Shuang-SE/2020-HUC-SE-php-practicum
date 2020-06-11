@@ -82,16 +82,10 @@
             return false;
         }
 
-        function getBriefBookByISBN($ISBN) {
+        function getTypes() {
             $db = $this->getDB();
-            if ($stmt = $db->prepare('select ISBN, book . name, type . name as type, unit_price, cover
-                                                    from book, type 
-                                                    where ISBN = :ISBN
-            and type_id = type . id')) {
-                $stmt->execute([
-                    'ISBN' => $ISBN
-                ]);
-                return $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($stmt = $db->query('select name as type from type')) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
             return false;
         }

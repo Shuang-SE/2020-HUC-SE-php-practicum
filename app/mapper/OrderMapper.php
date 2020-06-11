@@ -22,26 +22,26 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        /**
-         * @param $userId
-         * @return array|bool
-         */
-        function getOrders($userId) {
-            $db = $this->getDB();
-            $sql = 'select `order`.id as order_id, book_ISBN as ISBN, amount, order_status, book.name as book_name, book.unit_price, total_price 
-                    from book, `order`, user 
-                    where user.id = user_id 
-                      and book.ISBN = book_ISBN 
-                      and user_id = :user_id';
-            if ($stmt = $db->prepare($sql)) {
-                if ($stmt->execute([
-                    'user_id' => $userId,
-                ])) {
-                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-                }
-            }
-            return false;
-        }
+//        /**
+//         * @param $userId
+//         * @return array|bool
+//         */
+//        function getOrders($userId) {
+//            $db = $this->getDB();
+//            $sql = 'select `order`.id as order_id, book_ISBN as ISBN, amount, order_status, book.name as book_name, book.unit_price, total_price
+//                    from book, `order`, user
+//                    where user.id = user_id
+//                      and book.ISBN = book_ISBN
+//                      and user_id = :user_id';
+//            if ($stmt = $db->prepare($sql)) {
+//                if ($stmt->execute([
+//                    'user_id' => $userId,
+//                ])) {
+//                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+//                }
+//            }
+//            return false;
+//        }
 
         function getShoppingCartByUserId($userId) {
             $db = $this->getDB();

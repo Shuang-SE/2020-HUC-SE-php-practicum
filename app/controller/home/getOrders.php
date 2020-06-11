@@ -1,6 +1,6 @@
 <?php
     /**
-     * 获取用户全部订单
+     * 获取用户订单(已付款的)
      * http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getOrders.php
      *
      * return:
