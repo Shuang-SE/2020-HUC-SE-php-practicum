@@ -33,7 +33,6 @@
                     'err_code' => 0,
                     'user_id' => $id,
                 ];
-                $_SESSION['user_id'] = $id;
             }
             echo json_encode($res);
         } else {

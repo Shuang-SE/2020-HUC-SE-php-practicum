@@ -73,7 +73,7 @@
 
         function getBookByISBN($ISBN) {
             $db = $this->getDB();
-            if ($stmt = $db->prepare('select * from book where ISBN = :ISBN')) {
+            if ($stmt = $db->prepare('select book.*, type.name as type from book, type where type_id = type.id and ISBN = :ISBN')) {
                 $stmt->execute([
                     'ISBN' => $ISBN
                 ]);
