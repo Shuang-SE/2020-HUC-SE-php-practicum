@@ -19,7 +19,7 @@
 
     <!--form#shoppingCart是购物车-->
     <form id="shoppingCart" action="./buy-now.html" method="post">
-        <!--div#item{index}是购物车项, {item}是标注当前项目的下标, 下同-->
+        <!--div#item{index}是购物车项, {index}是标注当前项目的下标, 下同-->
         <div id="item{index}" class="shoppingCartItem">
             <!--input[name="check"]用来标识购物车项是否勾选, 绑定一些处理事件等-->
             <input type="checkbox" name="check" id="itemCheck{index}"/>
@@ -32,9 +32,9 @@
                 <!--a.titleImage是图书封面-->
                 <a id="titleImage{index}" class="titleImage" href="#" title="#"><img src="#"/></a>
                 <!--a.title是书名-->
-                <a class="title" href="#" title="#">书名</a>
+                <a id="title{index}" class="title" href="#" title="#">书名</a>
                 <!--span#price是单价-->
-                <span id="price{index}" class="price"><span class="sign"></span></span>
+                <div id="price{index}" class="price"><span class="sign"></span><span class="priceNum"></span></div>
                 <!--div.counterContainer是计数器, 用于选择一个项目买多少-->
                 <div class="counterContainer">
                     <!--span.counterMinus是-按钮, 用于减少一个项目数量-->
@@ -45,7 +45,7 @@
                     <span id="counterAdd{index}" class="counterAdd">+</span>
                 </div>
                 <!--span.totalPrice是显示当前项目的总价格的组件-->
-                <span id="totalPrice{index}" class="totalPrice"><span class="sign"></span></span>
+                <div id="totalPrice{index}" class="totalPrice"><span class="sign"></span><span class="priceNum"></span></div>
                 <!--div.operationContainer是操作框容器, 放置一些对当前项目的操作-->
                 <div class="operationContainer">
                     <!--span.deleteCartItem是删除按钮, 用于删除当前项目-->
@@ -63,9 +63,9 @@
             <!--span#deleteSelected是删除选中项目的按钮-->
             <span id="deleteSelected"></span>
             <!--span#selectedCounter是选中项目的计数器-->
-            <span id="selectedCounter"></span>
+            <div id="selectedCounter"><span class="selectedCounterNum"></span></div>
             <!--span#sumPrice是一共要付款金额的显示器-->
-            <span id="sumPrice"><span class="sign"></span></span>
+            <div id="sumPrice"><span class="sign"></span><span class="priceNum"></span></div>
             <!--input[type="submit"], 无需多说, 提交购物车, 完成付款-->
             <input type="submit" value="去付款" id="payButton"/>
         </div>

@@ -2,7 +2,7 @@ import {setHeader, generateBookshelf} from "./base.js";
 
 $().ready(function() {
     // 导入header;
-    setHeader();
+    setHeader({});
 
     // 生成一个书架;
     function getBookshelfContainer() {

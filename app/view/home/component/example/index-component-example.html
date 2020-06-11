@@ -5,7 +5,11 @@
     <div id="classListTitle">图书分类</div>
     <ul id="classList">
         <!--通常这个href="url"是要加参数的, 通过get在后端获得参数处理, 生成不同的页面-->
-        <li><a href="#">图书分类</a></li>
+        <li>
+            <a id="classTitle{index}" href="#">图书分类</a>
+            <!--span.className是类别名称, 隐藏字段, 用于标识一个类别-->
+            <span id="className{index}" class="className"></span>
+        </li>
         <li><a href="#">图书分类</a></li>
         <li><a href="#">图书分类</a></li>
         <li><a href="#">图书分类</a></li>

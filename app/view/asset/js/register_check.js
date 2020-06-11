@@ -10,7 +10,7 @@ export function setPromptInfo(selector, info, style) {
 
 // 刷新验证码;
 export function refreshCaptcha(event) {
-    event.data.captchaImage.attr("src", `captcha_generator?timestamp=${new Date().valueOf()}`);
+    event.data.captchaImage.attr("src", `http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/captchaGenerator.php?timestamp=${new Date().valueOf()}`);
 }
 
 // 验证码输入提示;
@@ -28,18 +28,19 @@ export function captchaOnBlur(event) {
         return checkStatus[index] = false;
     }
     checkStatus[index] = true;
-    $.ajax({
-        url: `ajax_captcha_generator?timestamp=${new Date().valueOf()}`,
-        method: "get",
-        content: "text",
-        async: false,
-        success: function(data) {
-            if (captchaVal.toLowerCase() !== data.toLowerCase()) {
-                setPromptInfo(captchaPrompt, "验证码输入有误, 请重新输入!", "error");
-                checkStatus[index] = false;
+    let captcha = "";
+    $.ajaxSettings.async = false;
+    $.get(`http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getCaptcha.php?timestamp=${new Date().valueOf()}`,
+        {},
+        function(result) {
+            if(!result['err_code']) {
+                captcha = result['captcha'];
             }
-        }
-    });
+        }, 'json');
+    if (captchaVal.toLowerCase() !== captcha.toLowerCase()) {
+        setPromptInfo(captchaPrompt, "验证码输入有误, 请重新输入!", "error");
+        return checkStatus[index] = false;
+    }
     if (checkStatus[index]) {
         setPromptInfo(captchaPrompt, "验证码输入正确!", "correct");
     }
@@ -80,18 +81,14 @@ $().ready(function() {
             return checkStatus[index] = false;
         }
         checkStatus[index] = true;
-        $.ajax({
-            url: `ajax_username_servlet?username=${usernameVal}&timestamp=${new Date().valueOf()}`,
-            method: "get",
-            content: "text",
-            async: false,
-            success: function(data) {
-                if (data === "false") {
+        $.get("http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/ifUserDuplicated.php",
+            {username: usernameVal},
+            function(result) {
+                if(result['err_code'] !== 0) {
                     setPromptInfo(usernamePrompt, "用户名已被占用!", "error");
                     checkStatus[index] = false;
                 }
-            }
-        });
+            }, "json");
         if (checkStatus[index]) {
             setPromptInfo(usernamePrompt, "用户名可用!", "correct");
         }
@@ -187,7 +184,13 @@ $().ready(function() {
         });
         if (flag) {
             lastCheckInfo.css("display", "none");
-            return true;
+            $.post("http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/register.php",
+                {username: username.val(), password: password.val(), age: 18, contact_info: phoneNumber.val(), gender: $(`input[name="gender"]`).val()},
+                function(result) {
+                    if(!result['err_code']) {
+                        location.href = "./login.html";
+                    }
+                }, 'json');
         }
         lastCheckInfo.css("display", "inline");
         return false;

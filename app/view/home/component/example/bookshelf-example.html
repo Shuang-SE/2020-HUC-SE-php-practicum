@@ -5,13 +5,15 @@
         <!--li.bookContainer是一本书-->
         <li class="bookContainer">
             <!--img.cover是封面, a用来跳转详情页-->
-            <a href="#" title="书名"><img src="#" class="cover" alt="书名"/></a>
+            <a id="book{index}" href="#" title="书名"><img src="#" class="cover" alt="书名"/></a>
             <!--span.title是标题-->
             <span class="title">测试...</span>
             <!--span.author是作者-->
             <span class="author">测试...</span>
             <!--span.price是价格, 其中内嵌的span.sign是单位符号-->
             <span class="price"><span class="sign"></span>109.99</span>
+            <!--span.isbn是ISBN, 隐藏字段, 用于标识一本书-->
+            <span id="isbn{index}" class="isbn"></span>
         </li>
     </ul>
     <!--可以有多个书架, 但通常同时只显示一个-->

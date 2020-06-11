@@ -2,7 +2,7 @@ import {setHeader, generateBookshelf} from "./base.js";
 
 $().ready(function() {
     // 导入header;
-    setHeader();
+    setHeader({});
 
     // 动态生成类别畅销榜单;
     function generateRankList(num) {
@@ -24,12 +24,13 @@ $().ready(function() {
             }
             let rankNum = $(`<span class="rankNum">${index}</span>`);
             let rankContent = $(`<div class="rankContent"></div>`);
-            let titleImage = $(`<a class="titleImage" href="#" title=${data.title}><img src="${data.img}"/></a>`);
+            let titleImage = $(`<a id="rankListTitleImage${index}" class="titleImage" href="#" title=${data.title}><img src="${data.img}"/></a>`);
             let itemInfo = $(`<div class="itemInfo"></div>`);
-            let title = $(`<a class="title" href="#" title=${data.title}>${data.title}</a>`);
+            let title = $(`<a id="rankListTitle${index}" class="title" href="#" title=${data.title}>${data.title}</a>`);
             let price = $(`<span class='price'><span class='sign'></span>${data.price}</span>`);
+            let rankListIsbn = $(`<span id="rankListIsbn${index}" class="rankListIsbn">${data.isbn}</span>`);
             // 组装;
-            itemInfo.append(title, price);
+            itemInfo.append(title, price, rankListIsbn);
             rankContent.append(titleImage, itemInfo);
             return item.append(rankNum, rankContent);
         }
@@ -39,8 +40,9 @@ $().ready(function() {
         for(let i = 0; i < num; i++) {
             let data = {
                 img: "../asset/img/default-cover/default-cover-0.jpg",
-                title: `标题测试${i}...`,
-                price: 199.99
+                title: `标题测试${i + 1}...`,
+                price: 199.99,
+                isbn: `201736025030${i + 1}`
             };
             rankList.append(generateRankListItem(i + 1, data));
         }

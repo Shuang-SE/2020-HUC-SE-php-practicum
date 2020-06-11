@@ -136,3 +136,8 @@
     flex-basis: 22%;
     font-size: 20px;
 }
+
+/*隐藏ISBN, 只在查数据库时使用*/
+.itemInfo .rankListIsbn {
+    display: none;
+}

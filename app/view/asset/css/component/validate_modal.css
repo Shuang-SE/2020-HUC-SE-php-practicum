@@ -1,6 +1,6 @@
 /*Modal窗体样式*/
 #validateModal {
-    /*display: none;*/
+    display: none;
     position: fixed;
     top: 0;
     left: 0;

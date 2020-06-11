@@ -1,11 +1,18 @@
-import {generateBookshelf, setHeader, setValidateModal} from "./base.js";
+import {generateBookshelf, setHeader} from "./base.js";
+import {setValidateModal, setBookInfoModal} from "./base.js";
 
 $().ready(function() {
     // 导入header;
-    setHeader();
+    function setHeaderWrapper() {
+        setHeader({});
+    }
+    setHeaderWrapper();
 
     // 导入验证的Modal;
     setValidateModal();
+
+    // 导入详情的Modal;
+    setBookInfoModal();
 
     // 动态生成图书类别栏;
     function generateClassList(num) {
@@ -17,7 +24,11 @@ $().ready(function() {
             let data = {
                 className: `图书分类${i}`
             };
-            classList.append($(`<li><a href='#'>${data.className}</a></li>`));
+            let classListItem = $(`<li></li>`);
+            let classTitle = $(`<a id="classTitle${i}" href="#" title="${data.className}">${data.className}</a>`);
+            let className = $(`<span id="className${i}" class="className">${data.className}</span>`);
+            classListItem.append(classTitle, className);
+            classList.append(classListItem);
         }
         return classListContainer.append(classList);
     }

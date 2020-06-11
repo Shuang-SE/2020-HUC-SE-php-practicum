@@ -46,3 +46,8 @@
     flex-basis: 15%;
     color: #fe272e;;
 }
+
+/*隐藏ISBN, 只在查数据库时使用*/
+.bookContainer .isbn {
+    display: none;
+}

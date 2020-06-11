@@ -1,22 +1,22 @@
-export function loadComponent(selector, url, func) {
-    $(selector).load(url, func);
+export function loadComponent(container, url, func) {
+    $(container).load(url, func);
 }
 
-export function setStyle(selector, url) {
+export function setStyle(container, url) {
     let style = $("<link>", {
         type: "text/css",
         rel: "stylesheet",
         href: url
     });
-    selector.prepend(style);
+    container.append(style);
 }
 
-export function retrieveScript(selector, url) {
+export function retrieveScript(container, url) {
     let sc = $("<script>", {
         type: "module",
         src: url
     });
-    selector.prepend(sc);
+    container.append(sc);
 }
 
 // 根据type, 设置登录/注册的输入框;
@@ -32,11 +32,20 @@ export function setValidateBox(type) {
 
 // 设置Header;
 // 规定在任何页面中, 只有div#headerContainer才能是header的容器;
-export function setHeader() {
+export function setHeader(data) {
+    if(data.html == null) {
+        data.html = "./component/header.html";
+    }
+    if(data.js == null) {
+        data.js = "../asset/js/header.js";
+    }
+    if(data.css == null) {
+        data.css = "../asset/css/component/header.css";
+    }
     const headerContainer = $("#headerContainer");
-    loadComponent(headerContainer, "./component/header.html", function() {
-        setStyle(headerContainer, "../asset/css/component/header.css");
-        retrieveScript(headerContainer, "../asset/js/header.js");
+    loadComponent(headerContainer, data.html, function() {
+        setStyle(headerContainer, data.css);
+        retrieveScript(headerContainer, data.js);
     });
 }
 
@@ -47,6 +56,16 @@ export function setValidateModal() {
     loadComponent(validateModalContainer, "./component/validate-modal.html", function() {
         setStyle(validateModalContainer, "../asset/css/component/validate_modal.css");
         retrieveScript(validateModalContainer, "../asset/js/validate_modal.js");
+    });
+}
+
+// 设置书详情的Modal窗体;
+// 规定在任何页面中, 只有div#bookInfoModalContainer才能是header的容器;
+export function setBookInfoModal() {
+    const validateModalContainer = $("#bookInfoModalContainer");
+    loadComponent(validateModalContainer, "./component/book-info-modal.html", function() {
+        setStyle(validateModalContainer, "../asset/css/component/book_info_modal.css");
+        retrieveScript(validateModalContainer, "../asset/js/book_info_modal.js");
     });
 }
 
@@ -77,14 +96,15 @@ export function generateBookshelf(additionalClasses, num) {
     }
 
     // 生成一本书;
-    function generateBook(data) {
+    function generateBook(index, data) {
         let bookContainer = $(`<li class="bookContainer"></li>`);
-        let cover = $(`<a href="#" title=${data.title}><img class="cover" src="${data.src}" alt=''/></a>`);
+        let cover = $(`<a id="book${index}" href="#" title=${data.title}><img class="cover" src="${data.src}" alt=''/></a>`);
         let title = $(`<span class="title">${data.title}</span>`);
         let author = $(`<span class="author">${data.author}</span>`);
         let price = $(`<span class="price"><span class="sign"></span>${data.price}</span>`);
+        let isbn = $(`<span id="isbn${index}" class="isbn">${data.isbn}</span>`);
         // 组装;
-        return bookContainer.append(cover, title, author, price);
+        return bookContainer.append(cover, title, author, price, isbn);
     }
 
     let bookshelf = $("<ul>", {class: `bookshelf ${additionalClasses}`});
@@ -94,9 +114,10 @@ export function generateBookshelf(additionalClasses, num) {
             src: src,
             title: `标题测试${i}...`,
             author: `作者测试${i}...`,
-            price: 109.99
+            price: 109.99,
+            isbn: `201736025030${i}`,
         };
-        bookshelf.append(generateBook(data));
+        bookshelf.append(generateBook(i, data));
     }
     return bookshelf;
 }
@@ -112,10 +133,7 @@ export function generateInfoTray(type = "shoppingCart") {
     let numberCounterLabel = $(`<div id="numberCounterLabel" class="counterContainer">数量</div>`);
     let totalPriceLabel = $(`<span id="totalPriceLabel" class="totalPrice">金额</span>`);
     let operationLabel = $(`<div id="operationLabel" class="operationContainer">操作</div>`);
-    if(type === "pay") {
-        fakeCheck = null;
-    }
-    else if(type === "order") {
+    if (type === "order") {
         fakeCheck = null;
         operationLabel = $(`<div id="operationLabel" class="operationContainer">创建时间</div>`);
     }
@@ -132,20 +150,20 @@ export function generateShoppingCartItem(index, data, type = "shoppingCart") {
     let isbn = $(`<input type="hidden" name="ISBN${index}" value="${data.isbn}"/>`);
     let totalPrice = $(`<input type="hidden" name="totalPrice{index}" value="${data.price}"/>`);
     let titleImage = $(`<a id="titleImage${index}" class="titleImage" href="#" title="${data.title}"><img src="${data.img}"/></a>`);
-    let title = $(`<a class="title" href="#" title="${data.title}">${data.title}</a>`);
-    let priceLabel = $(`<span id="price${index}" class="price"><span class="sign"></span>${data.price}</span>`);
+    let title = $(`<a id="title${index}" class="title" href="#" title="${data.title}">${data.title}</a>`);
+    let priceLabel = $(`<div id="price${index}" class="price"><span class="sign"></span><span class="priceNum">${data.price}</span></div>`);
     let counterContainer = $(`<div class="counterContainer"></div>`);
     let counterMinus = $(`<span id="counterMinus${index}" class="counterMinus">-</span>`);
     let counter = $(`<input type="text" name="counter${index}" class="counter" value="1" maxlength="3"/>`);
     let counterAdd = $(`<span id="counterAdd${index}" class="counterAdd">+</span>`);
-    let totalPriceLabel = $(`<span id="totalPrice${index}" class="totalPrice"><span class="sign"></span>${data.price}</span>`);
+    let totalPriceLabel = $(`<div id="totalPrice${index}" class="totalPrice"><span class="sign"></span><span class="priceNum">${data.price}</span></div>`);
     let operationContainer = $(`<div class="operationContainer"></div>`);
     let deleteCartItem = $(`<span id="deleteCartItem${index}" class="deleteCartItem">删除</span>`);
     let payForCartItem = $(`<a id="payForCartItem${index}" class="payForCartItem" href="#">立即付款</a>`);
-    if(type === "pay") {
-        check = payForCartItem = null;
-    }
-    else if(type === "order") {
+    if (type === "pay") {
+        check = $(`<input type="checkbox" name="check" id="itemCheck${index}" checked/>`);
+        payForCartItem = null;
+    } else if (type === "order") {
         check = payForCartItem = counterMinus = counterAdd = null;
         counter = $(`<span id="counter${index}" class="counter">${data.counter}</span>`);
         deleteCartItem = $(`<span id="itemCreateTime{index}" class="itemCreateTime">${data.createTime}</span>`);
@@ -162,10 +180,10 @@ export function generateConfirmPanel(type = "shoppingCart") {
     let confirmPanel = $(`<div id="confirmPanel">`);
     let checkAll = $(`<label><input type="checkbox" name="checkAll" id="checkAll"/>全选</label>`);
     let deleteSelected = $(`<span id="deleteSelected">删除选中</span>`);
-    let selectedCounter = $(`<span id="selectedCounter">已选0项</span>`);
-    let sumPrice = $(`<span id="sumPrice"><span class="sign"></span>0</span>`);
+    let selectedCounter = $(`<div id="selectedCounter">已选<span class="selectedCounterNum">0</span>项</div>`);
+    let sumPrice = $(`<div id="sumPrice"><span class="sign"></span><span class="priceNum">0.00</span></div>`);
     let payButton = $(`<input type="submit" value="去付款" id="payButton"/>`);
-    if(type === "pay") {
+    if (type === "pay") {
         checkAll = deleteSelected = selectedCounter = null;
         payButton = $(`<input type="button" value="确认付款" id="payButton"/>`);
     }
@@ -180,7 +198,7 @@ export function generateShoppingCart(data, num, url, type = "shoppingCart") {
     shoppingCartContainer.append(generateInfoTray(type));
     // 生成购物车主体;
     let shoppingCart = $(`<form id="shoppingCart" action=${url} method="post">`);
-    for(let i = 0; i < num; i++) {
+    for (let i = 0; i < num; i++) {
         data = {
             isbn: `201736025030${i}`,
             title: `测试标题${i}`,
@@ -192,7 +210,7 @@ export function generateShoppingCart(data, num, url, type = "shoppingCart") {
         shoppingCart.append(generateShoppingCartItem(i, data, type));
     }
     // 生成底栏, 查看订单页不需要底栏;
-    if(type !== "order") {
+    if (type !== "order") {
         shoppingCart.append(generateConfirmPanel(type));
     }
     return shoppingCartContainer.append(shoppingCart);

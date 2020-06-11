@@ -161,3 +161,8 @@
 .bookContainer:hover {
     box-shadow: 0 0 5px #5b616c;
 }
+
+/*隐藏类别名称, 只在查数据库时使用*/
+#classList .className {
+    display: none;
+}

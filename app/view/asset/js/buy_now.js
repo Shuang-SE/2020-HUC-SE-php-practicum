@@ -1,11 +1,25 @@
 import {setHeader, generateShoppingCart} from "./base.js";
+import {bindForCounterButtons, bindForCounter} from "./shopping_cart_module.js";
+import {bindForDeleteButton, calculateSumPrice} from "./shopping_cart_module.js";
 
 $().ready(function() {
     // 导入header;
-    setHeader();
+    setHeader({});
+
+    // 当前购物车项目数量;
+    let num = 2;
 
     // 动态生成购物车;
-    $("#mainContainer").append(generateShoppingCart({}, 2, "./user-orders.html", "pay"));
+    $("#mainContainer").append(generateShoppingCart({}, num, "./user-orders.html", "pay"));
+
+    function bindForOrders(num) {
+        // 一开始要计算一下所有的价格(确认订单界面默认都选上了);
+        calculateSumPrice(num);
+        bindForCounterButtons(num);
+        bindForDeleteButton(num);
+        bindForCounter(num);
+    }
+    bindForOrders(num);
 
     // 动态生成Modal窗体, 模拟付款;
     function generateConfirmModal() {
