@@ -114,6 +114,9 @@
         function deleteOrderOrShoppingCartItem($orderId) {
             $db = $this->getDB();
             $sql = 'update `order` set order_status = \'已删除\' where id = :order_id';
+            if($stmt = $db->prepare($sql)) {
+
+            }
         }
 
     }
