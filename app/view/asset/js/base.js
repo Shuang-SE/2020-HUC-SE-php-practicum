@@ -85,7 +85,7 @@ export function generateBookshelf(additionalClasses, type, num) {
         let cover = $(`<a id="book${index}" href="#" title=${data.name}><img class="cover" src="${data.cover}" alt="${data.name}"/></a>`);
         let title = $(`<span class="title">${data.name}</span>`);
         let author = $(`<span class="author">${data.author}</span>`);
-        let price = $(`<span class="price"><span class="sign"></span>${data.unit_price}</span>`);
+        let price = $(`<span class="price"><span class="sign">￥</span>${data.unit_price}</span>`);
         let isbn = $(`<span id="isbn${index}" class="isbn">${data.ISBN}</span>`);
 
         // 组装之前, 绑定事件;
@@ -161,12 +161,12 @@ export function generateShoppingCartItem(index, data, type = "shoppingCart") {
     let totalPrice = $(`<input type="hidden" name="totalPrice{index}" value="${data.price}"/>`);
     let titleImage = $(`<a id="titleImage${index}" class="titleImage" href="#" title="${data.title}"><img src="${data.img}"/></a>`);
     let title = $(`<a id="title${index}" class="title" href="#" title="${data.title}">${data.title}</a>`);
-    let priceLabel = $(`<div id="price${index}" class="price"><span class="sign"></span><span class="priceNum">${data.price}</span></div>`);
+    let priceLabel = $(`<div id="price${index}" class="price"><span class="sign">￥</span><span class="priceNum">${data.price}</span></div>`);
     let counterContainer = $(`<div class="counterContainer"></div>`);
     let counterMinus = $(`<span id="counterMinus${index}" class="counterMinus">-</span>`);
     let counter = $(`<input type="text" name="counter${index}" class="counter" value="1" maxlength="3"/>`);
     let counterAdd = $(`<span id="counterAdd${index}" class="counterAdd">+</span>`);
-    let totalPriceLabel = $(`<div id="totalPrice${index}" class="totalPrice"><span class="sign"></span><span class="priceNum">${data.price}</span></div>`);
+    let totalPriceLabel = $(`<div id="totalPrice${index}" class="totalPrice"><span class="sign">￥</span><span class="priceNum">${data.price}</span></div>`);
     let operationContainer = $(`<div class="operationContainer"></div>`);
     let deleteCartItem = $(`<span id="deleteCartItem${index}" class="deleteCartItem">删除</span>`);
     let payForCartItem = $(`<a id="payForCartItem${index}" class="payForCartItem" href="#">立即付款</a>`);
@@ -191,7 +191,7 @@ export function generateConfirmPanel(type = "shoppingCart") {
     let checkAll = $(`<label><input type="checkbox" name="checkAll" id="checkAll"/>全选</label>`);
     let deleteSelected = $(`<span id="deleteSelected">删除选中</span>`);
     let selectedCounter = $(`<div id="selectedCounter">已选<span class="selectedCounterNum">0</span>项</div>`);
-    let sumPrice = $(`<div id="sumPrice"><span class="sign"></span><span class="priceNum">0.00</span></div>`);
+    let sumPrice = $(`<div id="sumPrice"><span class="sign">￥</span><span class="priceNum">0.00</span></div>`);
     let payButton = $(`<input type="submit" value="去付款" id="payButton"/>`);
     if (type === "pay") {
         checkAll = deleteSelected = selectedCounter = null;
