@@ -1,6 +1,17 @@
 import {setHeader, generateBookshelf} from "./base.js";
 
 $().ready(function() {
+    // 获取url参数;
+    function getQueryString(name) {
+        let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        let r   = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            // 解码URL;
+            return decodeURI(r[2]);
+        }
+        return null;
+    }
+
     // 导入header;
     setHeader({});
 
@@ -53,7 +64,8 @@ $().ready(function() {
     // 生成一个书架;
     function getBookshelfContainer() {
         const bookshelfContainer = $(`<div id="bookshelfContainer"></div>`);
-        return bookshelfContainer.append(generateBookshelf("", 8));
+        console.log(getQueryString("type"), getQueryString("length"));
+        return bookshelfContainer.append(generateBookshelf("", getQueryString("type"), getQueryString("length")));
     }
     $("#mainContainer").append(getBookshelfContainer());
 

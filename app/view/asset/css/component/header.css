@@ -29,6 +29,10 @@
     background: url("../../img/icon/home-icon.png") no-repeat center;
 }
 
+#functionArea a:hover {
+    opacity: 75%;
+}
+
 /*功能区表单样式*/
 #searchForm {
     width: 70%;
@@ -77,14 +81,9 @@
     background: url("../../img/icon/shopping-cart-icon.png") no-repeat center;
 }
 
-#cartIcon::after {
-    content: "999+";
-    position: relative;
-    left: 38px;
-    background-color: #ff4f4f;
-    color: #fff;
-    border-radius: 50px;
-    padding: 2px 5px;
+#cartIcon:hover {
+    cursor: pointer;
+    opacity: 75%;
 }
 
 #cartIcon:hover::after {

@@ -28,6 +28,6 @@
          * Database password
          * @var string
          */
-        const DB_PASSWORD = 'root';
+        const DB_PASSWORD = '$Aaron7$';
 
     }

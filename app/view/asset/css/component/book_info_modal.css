@@ -1,6 +1,6 @@
 /*Modal窗体样式*/
 #bookInfoModal {
-    /*display: none;*/
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -64,6 +64,7 @@
 
 #rightSide #row0 {
     flex-basis: 10%;
+    margin-bottom: 15px;
 }
 
 #rightSide #row1 {
@@ -71,7 +72,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
 #rightSide #row2 {

@@ -147,10 +147,10 @@
 }
 
 .bookContainer {
-    flex-basis: 18%;
+    flex-basis: 20%;
     border: 1px #fff solid;
     align-items: center;
-    margin: 10px 0;
+    margin: 10px 10px;
     background-color: #fff;
 }
 

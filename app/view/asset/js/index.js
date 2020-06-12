@@ -14,39 +14,45 @@ $().ready(function() {
     // 导入详情的Modal;
     setBookInfoModal();
 
+    let classes = null;
+    $.ajaxSettings.async = false;
+    $.get("http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getTypes.php",
+        {},
+        function(result) {
+            classes = result.data;
+        }, 'json'
+    );
+
     // 动态生成图书类别栏;
-    function generateClassList(num) {
+    function generateClassList() {
         let classListContainer = $(`<div id="classListContainer">`);
         let classListTitle = $(`<div id="classListTitle">图书分类</div>`);
         classListContainer.append(classListTitle);
         let classList = $(`<ul id="classList">`);
-        for(let i = 0; i < num; i++) {
-            let data = {
-                className: `图书分类${i}`
-            };
+        for(let i = 0; i < classes.length; i++) {
             let classListItem = $(`<li></li>`);
-            let classTitle = $(`<a id="classTitle${i}" href="#" title="${data.className}">${data.className}</a>`);
-            let className = $(`<span id="className${i}" class="className">${data.className}</span>`);
-            classListItem.append(classTitle, className);
+            let classTitle = $(`<a id="classTitle${i}" href="#" title="${classes[i].class}">${classes[i].class}</a>`);
+            // let className = $(`<span id="className${i}" class="className">${data.className}</span>`);
+            classTitle.on("click", function() {
+                location.href = `./detailed-class.html?type=${classes[i].class}&length=${classes.length}`;
+            });
+            classListItem.append(classTitle);
             classList.append(classListItem);
         }
         return classListContainer.append(classList);
     }
-    $("#leftFrame").append(generateClassList(10));
+    $("#leftFrame").append(generateClassList());
 
     // 动态生成类别横向导航条;
-    function generateClassNav(num) {
+    function generateClassNav() {
         let classNav = $(`<ul id="classNav">`);
         let prefix = "classTitle";
-        for(let i = 0; i < num; i++) {
-            let data = {
-                className: `图书分类${i}`
-            };
+        for(let i = 0; i < classes.length; i++) {
             if(i === 0) {
-                classNav.append($(`<li class="${prefix}0 on"><span>${data.className}</span></li>`));
+                classNav.append($(`<li class="${prefix}0 on"><span>${classes[i].class}</span></li>`));
             }
             else {
-                classNav.append($(`<li class="${prefix}${i} off"><span>${data.className}</span></li>`));
+                classNav.append($(`<li class="${prefix}${i} off"><span>${classes[i].class}</span></li>`));
             }
         }
         return classNav;
@@ -57,13 +63,14 @@ $().ready(function() {
     function generateMultiBookshelf(num) {
         let prefix = "classShelf";
         const bookshelfContainer = $(`<div id="bookshelfContainer">`);
-        bookshelfContainer.append(generateBookshelf(`${prefix}0 display`, 10));
+
+        bookshelfContainer.append(generateBookshelf(`${prefix}0 display`, classes[0].class, 10));
         for(let i = 1; i < num; i++) {
-            bookshelfContainer.append(generateBookshelf(`${prefix}${i} hidden`, 10));
+            bookshelfContainer.append(generateBookshelf(`${prefix}${i} hidden`, classes[i].class, 10));
         }
         return bookshelfContainer;
     }
-    $("#mainContainer").append(generateMultiBookshelf(10));
+    $("#mainContainer").append(generateMultiBookshelf(classes.length));
 
     // 给导航栏的每个类别标签都绑定上触发事件;
     function bindForClassNav(trigger, target) {

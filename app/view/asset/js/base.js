@@ -78,45 +78,55 @@ export function setPageDivider() {
 }
 
 // 生成书架;
-export function generateBookshelf(additionalClasses, num) {
-    let src = "";
-    switch (Math.floor(Math.random() * 4)) {
-        case 0:
-            src = "../asset/img/default-cover/default-cover-0.jpg";
-            break;
-        case 1:
-            src = "../asset/img/default-cover/default-cover-1.jpg";
-            break;
-        case 2:
-            src = "../asset/img/default-cover/default-cover-2.jpg";
-            break;
-        case 3:
-            src = "../asset/img/default-cover/default-cover-3.jpg";
-            break;
-    }
-
+export function generateBookshelf(additionalClasses, type, num) {
     // 生成一本书;
     function generateBook(index, data) {
         let bookContainer = $(`<li class="bookContainer"></li>`);
-        let cover = $(`<a id="book${index}" href="#" title=${data.title}><img class="cover" src="${data.src}" alt=''/></a>`);
-        let title = $(`<span class="title">${data.title}</span>`);
+        let cover = $(`<a id="book${index}" href="#" title=${data.name}><img class="cover" src="${data.cover}" alt="${data.name}"/></a>`);
+        let title = $(`<span class="title">${data.name}</span>`);
         let author = $(`<span class="author">${data.author}</span>`);
-        let price = $(`<span class="price"><span class="sign"></span>${data.price}</span>`);
-        let isbn = $(`<span id="isbn${index}" class="isbn">${data.isbn}</span>`);
+        let price = $(`<span class="price"><span class="sign"></span>${data.unit_price}</span>`);
+        let isbn = $(`<span id="isbn${index}" class="isbn">${data.ISBN}</span>`);
+
+        // 组装之前, 绑定事件;
+        cover.on("click", function() {
+            $.ajaxSettings.async = false;
+            $.get("http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getBookByISBN.php",
+                {ISBN: isbn.html()},
+                function(result) {
+                    data = result.data;
+                }, 'json'
+            );
+            $("#cover").attr("src", data.cover);
+            $("#title").html(data.name);
+            $("#author").html(data.author);
+            $("#isbn").html(data.ISBN);
+            $("#price").find(".priceNum").html(data.unit_price);
+            $("#sales").html(data.sales);
+            $("#press").html(data.press);
+            $("#publicationDate").html(data.publicationDate);
+            $("#type").html(data.type);
+            $("#brief").html(data.brief);
+            $("#bookInfoModal").css("display", "block");
+        });
+
         // 组装;
         return bookContainer.append(cover, title, author, price, isbn);
     }
 
     let bookshelf = $("<ul>", {class: `bookshelf ${additionalClasses}`});
 
-    for (let i = 0; i < num; i++) {
-        let data = {
-            src: src,
-            title: `标题测试${i}...`,
-            author: `作者测试${i}...`,
-            price: 109.99,
-            isbn: `201736025030${i}`,
-        };
+    let books = null;
+    $.ajaxSettings.async = false;
+    $.get("http://localhost:63342/2020-HUC-SE-php-practicum/app/controller/home/getBooks.php",
+        {page: 1, size: num, type: type},
+        function(result) {
+            books = result.data;
+        }, 'json'
+    );
+
+    for (let i = 0; i < books.length; i++) {
+        let data = books[i];
         bookshelf.append(generateBook(i, data));
     }
     return bookshelf;

@@ -133,8 +133,9 @@
 
 /*书架样式*/
 .bookContainer {
-    flex-basis: 22%;
+    flex-basis: 25%;
     font-size: 20px;
+    margin: 10px;
 }
 
 /*隐藏ISBN, 只在查数据库时使用*/
